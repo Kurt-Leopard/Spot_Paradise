@@ -22,6 +22,7 @@
             </div>
             <div class="modal-body">
               <form @submit.prevent="saveChanges" enctype="multipart/form-data">
+
                 <div class="mb-3">
                   <label for="profile" class="form-label">Profile Picture</label>
                   <input type="file" id="profilePicture" name="profile" class="form-control" @change="handleFileUpload" />
@@ -90,6 +91,7 @@
               </thead>
               <tbody>
                 <tr v-for="item in items" :key="item.id">
+                  <template v-if="item.tourist_del !== undefined && item.tourist_del === 1">
                   <td>{{ item.id }}</td>
                   <td> <img :src="'./uploads/' + item.profilePicture" alt="" srcset="" style="height:35px;width:35px;" />
                   </td>
@@ -244,6 +246,7 @@
                       </div>
                     </div>
                   </td>
+                  </template>
                 </tr>
               </tbody>
             </table>
@@ -270,6 +273,7 @@ export default {
       phone: ref(''),
       address: ref(''),
       profilePicture: null,
+      tourist_del:ref(''),
     };
 
     const handleFileUpload = (event) => {
@@ -279,7 +283,7 @@ export default {
 
     const saveChanges = async () => {
       const formDataObject = new FormData();
-
+      formData.tourist_del.value=1;
       formDataObject.append("firstName", formData.firstName.value);
       formDataObject.append("lastName", formData.lastName.value);
       formDataObject.append("email", formData.email.value);
@@ -288,6 +292,7 @@ export default {
       formDataObject.append("phone", formData.phone.value);
       formDataObject.append("address", formData.address.value);
       formDataObject.append("profilePicture", formData.profilePicture);
+      formDataObject.append("tourist_del", formData.tourist_del.value);
 
       axios
         .post(API_URL + 'api/insert', formDataObject)

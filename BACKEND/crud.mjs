@@ -3,9 +3,9 @@ import db from './db.mjs';
 class CRUD {
 
 async insertData(formData) {
-    const { firstName, lastName, email, dateOfBirth, gender, phone, address, profilePicture } = formData;
-    const query = 'INSERT INTO touristaccount (firstName, lastName, email, dateOfBirth, gender, phone, address, profilePicture) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-    const values = [firstName, lastName, email, dateOfBirth, gender, phone, address,profilePicture ];
+    const { firstName, lastName, email, dateOfBirth, gender, phone, address, profilePicture ,tourist_del} = formData;
+    const query = 'INSERT INTO touristaccount (firstName, lastName, email, dateOfBirth, gender, phone, address, profilePicture,tourist_del) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)';
+    const values = [firstName, lastName, email, dateOfBirth, gender, phone, address,profilePicture,tourist_del ];
   
     try {
       await db.query(query, values);
@@ -54,17 +54,17 @@ async insertData(formData) {
 //     }
 //   }
 
-//   async deleteData(id) {
-//     const query = 'DELETE FROM admin WHERE id=?';
+  async deleteData(id) {
+    const query = 'DELETE FROM touristaccount WHERE id=?';
 
-//     try {
-//       await db.query(query, [id]);
-//       return 'Data deleted successfully';
-//     } catch (error) {
-//       console.error('Database query error:', error);
-//       throw 'Database query error';
-//     }
-//   }
+    try {
+      await db.query(query, [id]);
+      return 'Data deleted successfully';
+    } catch (error) {
+      console.error('Database query error:', error);
+      throw 'Database query error';
+    }
+  }
 }
 
 export default new CRUD();

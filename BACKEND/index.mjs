@@ -22,11 +22,11 @@ const upload = multer({ storage });
 
 
 app.post('/api/insert', upload.single('profilePicture'), async (req, res) => {
-    const { firstName, lastName, email, dateOfBirth, gender, phone, address } = req.body;
+    const { firstName, lastName, email, dateOfBirth, gender, phone, address,tourist_del } = req.body;
     const profilePicture = req.file ? req.file.filename : null;
   
     try {
-      const result = await CRUD.insertData({ firstName, lastName, email, dateOfBirth, gender, phone, address, profilePicture});
+      const result = await CRUD.insertData({ firstName, lastName, email, dateOfBirth, gender, phone, address, profilePicture,tourist_del});
       res.json({ message: result });
     } catch (error) {
       res.status(500).json({ error });
@@ -57,16 +57,16 @@ app.get('/api/get', async (req, res) => {
 //   }
 // });
 
-// app.post('/api/delete/:id', async (req, res) => {
-//   const id = req.params.id;
+app.post('/api/delete/:id', async (req, res) => {
+  const id = req.params.id;
 
-//   try {
-//     const result = await CRUD.deleteData(id);
-//     res.json({ message: result });
-//   } catch (error) {
-//     res.status(500).json({ error });
-//   }
-// });
+  try {
+    const result = await CRUD.deleteData(id);
+    res.json({ message: result });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+});
 
 const port = 3000;
 app.listen(port, () => {
