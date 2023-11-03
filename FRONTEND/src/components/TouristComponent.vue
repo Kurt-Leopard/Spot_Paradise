@@ -91,7 +91,8 @@
               <tbody>
                 <tr v-for="item in items" :key="item.id">
                   <td>{{ item.id }}</td>
-                  <td>{{ item.profile }}</td>
+                  <td> <img :src="'./uploads/' + item.profilePicture" alt="" srcset="" style="height:35px;width:35px;" />
+                  </td>
                   <td>{{ item.firstName }}</td>
                   <td>{{ item.lastName }}</td>
                   <td>{{ item.email }}</td>
@@ -119,10 +120,10 @@
                           </div>
                           <div class="modal-body">
                             <div>
-                              <img :src="item.profile['image.png']" alt="" srcset="" />
+                              <img :src="'./uploads/' + item.profilePicture" alt="" srcset="" />
                             </div>
                             <div>{{ item.id }}</div>
-                            <div>{{ item.profile }}</div>
+                            <div>{{ item.profilePicture }}</div>
                             <div>{{ item.firstName }}</div>
                             <div>{{ item.lastName }}</div>
                             <div>{{ item.email }}</div>
@@ -254,9 +255,9 @@
 </template>
   
 <script>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import axios from 'axios'
-const API_URL="http://localhost:3000/";
+const API_URL = "http://localhost:3000/";
 
 export default {
   setup() {
@@ -287,74 +288,40 @@ export default {
       formDataObject.append("phone", formData.phone.value);
       formDataObject.append("address", formData.address.value);
       formDataObject.append("profilePicture", formData.profilePicture);
-     
+
       axios
         .post(API_URL + 'api/insert', formDataObject)
         .then((response) => {
 
           alert('Inserted successfully');
+          fetchData();
         })
         .catch((error) => {
           console.error('Error inserting data:', error);
         });
     };
 
-   
+    const items = ref([]);
 
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(API_URL + 'api/get');
+        items.value = response.data;
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
+    onMounted(() => {
+      fetchData();
+    });
 
-    const items = ref([
-      {
-        id: 1,
-        profile: "image.png",
-        firstName: "Mark",
-        lastName: "Angelou",
-        email: "mark@gmail.com",
-        gender: "Male",
-        phone: "0925618842",
-      },
-      {
-        id: 2,
-        profile: "image.png",
-        firstName: "Jessica",
-        lastName: "Miller",
-        email: "jessica@gmail.com",
-        gender: "Female",
-        phone: "0812345678",
-      },
-      {
-        id: 3,
-        profile: "image.png",
-        firstName: "John",
-        lastName: "Smith",
-        email: "john@example.com",
-        gender: "Male",
-        phone: "0755533221",
-      },
-      {
-        id: 4,
-        profile: "image.png",
-        firstName: "Linda",
-        lastName: "Johnson",
-        email: "linda@example.com",
-        gender: "Female",
-        phone: "0666123456",
-      },
-      {
-        id: 5,
-        profile: "image.png",
-        firstName: "Robert",
-        lastName: "Davis",
-        email: "robert@example.com",
-        gender: "Male",
-        phone: "0988776543",
-      },
-    ]);
     return {
       items,
       formData,
       saveChanges,
       handleFileUpload,
+      fetchData,
     };
   },
 };

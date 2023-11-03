@@ -32,6 +32,16 @@ app.post('/api/insert', upload.single('profilePicture'), async (req, res) => {
       res.status(500).json({ error });
     }
   });
+
+app.get('/api/get', async (req, res) => {
+  try {
+    const data = await CRUD.getData(); 
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching data' });
+  }
+});
+
   
 
 // app.post('/api/update/:id', upload.single('profile'), async (req, res) => {

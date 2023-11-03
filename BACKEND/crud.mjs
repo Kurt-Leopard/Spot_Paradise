@@ -15,6 +15,17 @@ async insertData(formData) {
       throw 'Database query error';
     }
   }
+  async getData() {
+    const query = 'SELECT * FROM touristaccount'; // You can adjust the SQL query to fetch data based on your database schema.
+    
+    try {
+      const result = await db.query(query);
+      return result; // You may need to format the result as needed before returning it.
+    } catch (error) {
+      console.error('Database query error:', error);
+      throw 'Database query error';
+    }
+  }
   
 
 //   async updateData(id, fname, lname, user, pass, profile) {
