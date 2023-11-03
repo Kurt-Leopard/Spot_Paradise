@@ -17,53 +17,56 @@
   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
-  <title>Vite App</title>
+  <title>Spot Paradise</title>
   <style>
-   html{
-    scroll-behavior: smooth;
-   }
-   body{
-    overflow-x: hidden;
-    overflow-y: hidden;
-   }
-   .create-button {
-  display: inline-flex;
-  align-items: center;
-  padding: 7px 13px;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  overflow: hidden;
-  position: relative;
-  transition: background-color 0.3s;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-.button-text {
-  transition: transform 0.3s, opacity 0.3s;
-}
+    body {
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }
 
-.plus-icon {
-  position: fixed;
-  margin-left: 25px;
-  opacity: 0;
-  transform: translateX(10px);
-  transition: transform 0.3s, opacity 0.3s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    .create-button {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 13px;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+      transition: background-color 0.3s;
+    }
+
+    .button-text {
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .plus-icon {
+      position: fixed;
+      margin-left: 25px;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: transform 0.3s, opacity 0.3s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
 
-.create-button:hover .button-text {
-  transform: translateX(100%);
-  opacity: 0;
-}
+    .create-button:hover .button-text {
+      transform: translateX(100%);
+      opacity: 0;
+    }
 
-.create-button:hover .plus-icon {
-  transform: translateX(0);
-  opacity: 1;
-}
-/* ul.pagination li.page-item:not(:first-child):not(:last-child) .page-link {
+    .create-button:hover .plus-icon {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    /* ul.pagination li.page-item:not(:first-child):not(:last-child) .page-link {
   background-color: #14243c;
 } */
   </style>
