@@ -92,160 +92,175 @@
               <tbody>
                 <tr v-for="item in items" :key="item.id">
                   <template v-if="item.tourist_del !== undefined && item.tourist_del === 1">
-                  <td>{{ item.id }}</td>
-                  <td> <img :src="'./uploads/' + item.profilePicture" alt="" srcset="" style="height:35px;width:35px;" />
-                  </td>
-                  <td>{{ item.firstName }}</td>
-                  <td>{{ item.lastName }}</td>
-                  <td>{{ item.email }}</td>
-                  <td>{{ item.gender }}</td>
-                  <td>{{ item.phone }}</td>
-                  <td>
-                    <!-- view btn -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                      data-bs-toggle="modal" :data-bs-target="'#viewmodal-' + item.id"
-                      class="viewBtn viewImg bi bi-eye text-white bg-success p-1 mx-1 rounded" viewBox="0 0 16 16">
-                      <path
-                        d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
-                      <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
-                    </svg>
-                    <!-- view modal -->
-                    <div class="modal fade" :id="'viewmodal-' + item.id" tabindex="-1" aria-labelledby="exampleModalLabel"
-                      aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">
-                              View Information
-                            </h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            <div>
-                              <img :src="'./uploads/' + item.profilePicture" alt="" srcset="" />
+                    <td>{{ item.Tourist_id }}</td>
+                    <td> <img :src="'./uploads/' + item.profilePicture" alt="" srcset=""
+                        style="height:35px;width:35px;" />
+                    </td>
+                    <td>{{ item.firstName }}</td>
+                    <td>{{ item.lastName }}</td>
+                    <td>{{ item.email }}</td>
+                    <td>{{ item.gender }}</td>
+                    <td>{{ item.phone }}</td>
+                    <td>
+                      <!-- view btn -->
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        data-bs-toggle="modal" :data-bs-target="'#viewmodal-' + item.Tourist_id"
+                        class="viewBtn viewImg bi bi-eye text-white bg-success p-1 mx-1 rounded" viewBox="0 0 16 16">
+                        <path
+                          d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                        <path
+                          d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                      </svg>
+                      <!-- view modal -->
+                      <div class="modal fade" :id="'viewmodal-' + item.Tourist_id" tabindex="-1"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">
+                                View Information
+                              </h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div>{{ item.id }}</div>
-                            <div>{{ item.profilePicture }}</div>
-                            <div>{{ item.firstName }}</div>
-                            <div>{{ item.lastName }}</div>
-                            <div>{{ item.email }}</div>
-                            <div>{{ item.gender }}</div>
-                            <div>{{ item.phone }}</div>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                              Close
-                            </button>
-                            <button type="button" class="btn btn-primary">
-                              Save changes
-                            </button>
+                            <div class="modal-body">
+                              <div>
+                                <img :src="'./uploads/' + item.profilePicture" alt="" srcset="" />
+                              </div>
+                              <div>{{ item.Tourist_id }}</div>
+                              <div>{{ item.profilePicture }}</div>
+                              <div>{{ item.firstName }}</div>
+                              <div>{{ item.lastName }}</div>
+                              <div>{{ item.email }}</div>
+                              <div>{{ item.gender }}</div>
+                              <div>{{ item.phone }}</div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                Close
+                              </button>
+                              <button type="button" class="btn btn-primary">
+                                Save changes
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </td>
-                  <td>
-                    <!-- Edit btn-->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                      class="editBtn bi bi-pencil-square text-white bg-primary p-1 mx-1 rounded" viewBox="0 0 16 16"
-                      data-bs-toggle="modal" :data-bs-target="'#editmodal-' + item.id">
-                      <path
-                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                      <path fill-rule="evenodd"
-                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                    </svg>
-                    <!-- Edit modal -->
-                    <div class="modal fade" :id="'editmodal-' + item.id" tabindex="-1" aria-labelledby="exampleModalLabel"
-                      aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content" style="max-height: 550px; overflow-y: auto">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">
-                              Edit Information
-                            </h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            <form>
-                              <div class="mb-3">
-                                <label for="profile" class="form-label">Profile</label>
-                                <input type="file" id="profilePicture" name="profile" class="form-control" />
-                              </div>
-                              <div class="mb-3">
-                                <label for="firstName" class="form-label">First Name</label>
-                                <input type="text" class="form-control" id="firstName" v-model="item.firstName" />
-                              </div>
-                              <div class="mb-3">
-                                <label for="lastName" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" id="lastName" v-model="item.lastName" />
-                              </div>
-                              <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" v-model="item.email" />
-                              </div>
-                              <div class="mb-3">
-                                <label for="gender" class="form-label">Gender</label>
-                                <select class="form-select" id="gender" v-model="item.gender">
-                                  <option value="Male">Male</option>
-                                  <option value="Female">Female</option>
-                                </select>
-                              </div>
-                              <div class="mb-3">
-                                <label for="phone" class="form-label">Phone</label>
-                                <input type="text" class="form-control" id="phone" v-model="item.phone" />
-                              </div>
-                            </form>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                              Close
-                            </button>
-                            <button type="button" class="btn btn-primary">
-                              Save changes
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <!-- delete btn -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                      class="bi bi-trash text-white bg-danger p-1 rounded mx-1 delbtn" viewBox="0 0 16 16"
-                      data-bs-toggle="modal" :data-bs-target="'#deletemodal-' + item.id">
-                      <path
-                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
-                      <path
-                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
-                    </svg>
-                    <!-- Delete modal -->
-                    <div class="modal fade" :id="'deletemodal-' + item.id" tabindex="-1"
-                      aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">
-                              Confirm Deletion?
-                            </h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            <h5>
-                              Are you sure you delete this item {{ item.id }} ?
-                            </h5>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                              Cancel
-                            </button>
-                            <button type="button" class="btn btn-primary">
-                              Yes
-                            </button>
+                    </td>
+                    <td>
+                      <!-- Edit btn-->
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        class="editBtn bi bi-pencil-square text-white bg-primary p-1 mx-1 rounded" viewBox="0 0 16 16"
+                        data-bs-toggle="modal" :data-bs-target="'#editmodal-' + item.Tourist_id">
+                        <path
+                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                        <path fill-rule="evenodd"
+                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                      </svg>
+                      <!-- Edit modal -->
+                      <div class="modal fade" :id="'editmodal-' + item.Tourist_id" tabindex="-1"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content" style="max-height: 550px; overflow-y: auto">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">
+                                Edit Information
+                              </h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <form @submit.prevent="saveChangesUpdate(item.Tourist_id)" enctype="multipart/form-data">
+                                
+                                <div class="mb-3">
+                                  <label for="profile" class="form-label">Profile Picture</label>
+                                  <input type="file" id="profilePicture" name="profile" class="form-control"
+                                    @change="handleUpdateFileUpload" />
+                                </div>
+                                <div class="mb-3">
+                                  <label for="firstName" class="form-label">First Name</label>
+                                  <input type="text" class="form-control" id="firstName"
+                                    v-model="formDataEdit.firstName.value" />
+                                </div>
+                                <div class="mb-3">
+                                  <label for="lastName" class="form-label">Last Name</label>
+                                  <input type="text" class="form-control" id="lastName"
+                                    v-model="formDataEdit.lastName.value" />
+                                </div>
+                                <div class="mb-3">
+                                  <label for="email" class="form-label">Email</label>
+                                  <input type="email" class="form-control" id="email"
+                                    v-model="formDataEdit.email.value" />
+                                </div>
+                                <div class="mb-3">
+                                  <label for="Date" class="form-label">Date of Birth</label>
+                                  <input type="date" class="form-control" id="Date"
+                                    v-model="formDataEdit.dateOfBirth.value" />
+                                </div>
+                                <div class="mb-3">
+                                  <label for="gender" class="form-label">Gender</label>
+                                  <select class="form-select" id="gender" v-model="formDataEdit.gender.value">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                  </select>
+                                </div>
+                                <div class="mb-3">
+                                  <label for="phone" class="form-label">Phone</label>
+                                  <input type="text" class="form-control" id="phone" v-model="formDataEdit.phone.value" />
+                                </div>
+                                <div class="mb-3">
+                                  <label for="Address" class="form-label">Address</label>
+                                  <input type="text" class="form-control" id="Address"
+                                    v-model="formDataEdit.address.value" />
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Close
+                                  </button>
+                                  <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                              </form>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </td>
+                    </td>
+                    <td>
+                      <!-- delete btn -->
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        class="bi bi-trash text-white bg-danger p-1 rounded mx-1 delbtn" viewBox="0 0 16 16"
+                        data-bs-toggle="modal" :data-bs-target="'#deletemodal-' + item.Tourist_id">
+                        <path
+                          d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                        <path
+                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                      </svg>
+                      <!-- Delete modal -->
+                      <div class="modal fade" :id="'deletemodal-' + item.Tourist_id" tabindex="-1"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">
+                                Confirm Deletion?
+                              </h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <h5>
+                                Are you sure you delete this item {{ item.Tourist_id }} ?
+                              </h5>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                Cancel
+                              </button>
+                              <button type="button" class="btn btn-primary">
+                                Yes
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
                   </template>
                 </tr>
               </tbody>
@@ -273,17 +288,17 @@ export default {
       phone: ref(''),
       address: ref(''),
       profilePicture: null,
-      tourist_del:ref(''),
+      tourist_del: ref(''),
     };
+
 
     const handleFileUpload = (event) => {
       formData.profilePicture = event.target.files[0];
-      // console.log("Selected file:", formData.profilePicture);
     };
 
     const saveChanges = async () => {
       const formDataObject = new FormData();
-      formData.tourist_del.value=1;
+      formData.tourist_del.value = 1;
       formDataObject.append("firstName", formData.firstName.value);
       formDataObject.append("lastName", formData.lastName.value);
       formDataObject.append("email", formData.email.value);
@@ -316,27 +331,69 @@ export default {
         console.error('Error fetching data:', error);
       }
     };
+    // To set dafualt value in the Edit form of tourist
+    const formDataEdit = {
+      firstName: ref(''),
+      lastName: ref(''),
+      email: ref(''),
+      dateOfBirth: ref(''),
+      gender: ref(''),
+      phone: ref(''),
+      address: ref(''),
+      profilePicture: null,
+      Tourist_id: ref(''),
+    };
+
+
+    const handleUpdateFileUpload = (event) => {
+      formDataEdit.profilePicture = event.target.files[0];
+      console.log('formDataEdit:', formDataEdit.profilePicture);
+    };
+
+    const saveChangesUpdate = async (id) => {
+      const formDataObject = new FormData();
+      formDataEdit.Tourist_id = id;
+      formDataObject.append("firstName", formDataEdit.firstName.value);
+      formDataObject.append("lastName", formDataEdit.lastName.value);
+      formDataObject.append("email", formDataEdit.email.value);
+      formDataObject.append("dateOfBirth", formDataEdit.dateOfBirth.value);
+      formDataObject.append("gender", formDataEdit.gender.value);
+      formDataObject.append("phone", formDataEdit.phone.value);
+      formDataObject.append("address", formDataEdit.address.value);
+      formDataObject.append("profilePicture", formDataEdit.profilePicture);
+      formDataObject.append("Tourist_id", formDataEdit.Tourist_id);
+
+      axios
+        .put(API_URL + 'api/editTourist', formDataObject)
+        .then((response) => {
+          
+          alert('Updated successfully');
+          fetchData();
+        })
+        .catch((error) => {
+          console.error('Error inserting data:', error);
+        });
+    };
 
     onMounted(() => {
       fetchData();
+      $(document).ready(function () {
+        $(".list").DataTable();
+      });
     });
 
     return {
       items,
       formData,
+      formDataEdit,
       saveChanges,
       handleFileUpload,
       fetchData,
+      handleUpdateFileUpload,
+      saveChangesUpdate,
     };
   },
 };
-
-
-
-
-$(document).ready(function () {
-  $(".list").DataTable();
-});
 </script>
 <style scoped></style>
 

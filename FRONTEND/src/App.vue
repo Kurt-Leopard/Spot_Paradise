@@ -1,5 +1,5 @@
 <script>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 
 export default {
@@ -8,8 +8,138 @@ export default {
     const ReservationBackgroundColor = ref('')
     const ReservationColor = ref('white')
 
+    const isMaintenanceTrue = ref(true)
+    const MaintenanceBackgroundColor = ref('')
+    const MaintenanceColor = ref('white')
+
+    const isBoatdetailsTrue = ref(true)
+    const BoatdetailsBackgroundColor = ref('')
+    const BoatdetailsColor = ref('white')
+
+    const isAnnouncementTrue = ref(true)
+    const AnnouncementBackgroundColor = ref('')
+    const AnnouncementColor = ref('white')
+
+    const isNotificationTrue = ref(true)
+    const NotificationBackgroundColor = ref('')
+    const NotificationColor = ref('white')
+
+    const isTouristdestinationTrue = ref(true)
+    const TouristdestinationBackgroundColor = ref('')
+    const TouristdestinationColor = ref('white')
+
+    const isPackageTrue = ref(true)
+    const PackageBackgroundColor = ref('')
+    const PackageColor = ref('white')
+
+    const Package = () => {
+      PackageBackgroundColor.value = 'blue'
+      TouristdestinationBackgroundColor.value = ''
+      NotificationBackgroundColor.value = ''
+      MaintenanceBackgroundColor.value = ''
+      ReservationBackgroundColor.value = ''
+      BoatdetailsBackgroundColor.value = ''
+      AnnouncementBackgroundColor.value = ''
+      PackageColor.value = 'white'
+      const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
+
+      for (let i = 0; i < elements.length; i++) {
+        elements[i].value = elements[i].value === 'lightgray' ? '#f8f9fa' : '#f8f9fa'
+      }
+    }
+
+    const Touristdestination = () => {
+      TouristdestinationBackgroundColor.value = 'blue'
+      NotificationBackgroundColor.value = ''
+      MaintenanceBackgroundColor.value = ''
+      ReservationBackgroundColor.value = ''
+      BoatdetailsBackgroundColor.value = ''
+      AnnouncementBackgroundColor.value = ''
+      PackageBackgroundColor.value = ''
+      TouristdestinationColor.value = 'white'
+      const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
+
+      for (let i = 0; i < elements.length; i++) {
+        elements[i].value = elements[i].value === 'lightgray' ? '#f8f9fa' : '#f8f9fa'
+      }
+    }
+
+    const Notification = () => {
+      NotificationBackgroundColor.value = 'blue'
+      MaintenanceBackgroundColor.value = ''
+      ReservationBackgroundColor.value = ''
+      BoatdetailsBackgroundColor.value = ''
+      AnnouncementBackgroundColor.value = ''
+      TouristdestinationBackgroundColor.value = ''
+      PackageBackgroundColor.value = ''
+
+      NotificationColor.value = 'white'
+      const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
+
+      for (let i = 0; i < elements.length; i++) {
+        elements[i].value = elements[i].value === 'lightgray' ? '#f8f9fa' : '#f8f9fa'
+      }
+    }
+
+    const Maintenance = () => {
+      MaintenanceBackgroundColor.value = 'blue'
+      ReservationBackgroundColor.value = ''
+      BoatdetailsBackgroundColor.value = ''
+      AnnouncementBackgroundColor.value = ''
+      NotificationBackgroundColor.value = ''
+      TouristdestinationBackgroundColor.value = ''
+      PackageBackgroundColor.value = ''
+
+      MaintenanceColor.value = 'white'
+      const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
+
+      for (let i = 0; i < elements.length; i++) {
+        elements[i].value = elements[i].value === 'lightgray' ? '#f8f9fa' : '#f8f9fa'
+      }
+    }
+    const Announcement = () => {
+      AnnouncementBackgroundColor.value = 'blue'
+      MaintenanceBackgroundColor.value = ''
+      ReservationBackgroundColor.value = ''
+      BoatdetailsBackgroundColor.value = ''
+      NotificationBackgroundColor.value = ''
+      TouristdestinationBackgroundColor.value = ''
+      PackageBackgroundColor.value = ''
+
+      AnnouncementColor.value = 'white'
+      const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
+
+      for (let i = 0; i < elements.length; i++) {
+        elements[i].value = elements[i].value === 'lightgray' ? '#f8f9fa' : '#f8f9fa'
+      }
+    }
+
+    const Boatdetails = () => {
+      BoatdetailsBackgroundColor.value = 'blue'
+      ReservationBackgroundColor.value = ''
+      MaintenanceBackgroundColor.value = ''
+      AnnouncementBackgroundColor.value = ''
+      NotificationBackgroundColor.value = ''
+      TouristdestinationBackgroundColor.value = ''
+      PackageBackgroundColor.value = ''
+
+      MaintenanceColor.value = 'white'
+      const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
+
+      for (let i = 0; i < elements.length; i++) {
+        elements[i].value = elements[i].value === 'lightgray' ? '#f8f9fa' : '#f8f9fa'
+      }
+    }
+
     const ReservationList = () => {
       ReservationBackgroundColor.value = 'blue'
+      MaintenanceBackgroundColor.value = ''
+      BoatdetailsBackgroundColor.value = ''
+      AnnouncementBackgroundColor.value = ''
+      NotificationBackgroundColor.value = ''
+      TouristdestinationBackgroundColor.value = ''
+      PackageBackgroundColor.value = ''
+
       ReservationColor.value = 'white'
       const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
 
@@ -65,16 +195,46 @@ export default {
       for (let i = 0; i < elements.length; i++) {
         elements[i].value = i === index ? (elements[i].value === 'lightgray' ? '#f8f9fa' : 'lightgray') : '#f8f9fa'
         ReservationBackgroundColor.value = ''
+        MaintenanceBackgroundColor.value = ''
+        BoatdetailsBackgroundColor.value = ''
+        AnnouncementBackgroundColor.value = ''
+        NotificationBackgroundColor.value = ''
+        TouristdestinationBackgroundColor.value = ''
+        PackageBackgroundColor.value = ''
         ReservationColor.value = 'white'
       }
     }
 
     return {
+      ReservationList,
       isReservationTrue,
       ReservationBackgroundColor,
       ReservationColor,
-      ReservationList,
       isTrue,
+      Boatdetails,
+      isBoatdetailsTrue,
+      BoatdetailsBackgroundColor,
+      BoatdetailsColor,
+      Maintenance,
+      isMaintenanceTrue,
+      MaintenanceBackgroundColor,
+      MaintenanceColor,
+      Announcement,
+      isAnnouncementTrue,
+      AnnouncementBackgroundColor,
+      AnnouncementColor,
+      Notification,
+      isNotificationTrue,
+      NotificationBackgroundColor,
+      NotificationColor,
+      Touristdestination,
+      isTouristdestinationTrue,
+      TouristdestinationBackgroundColor,
+      TouristdestinationColor,
+      Package,
+      isPackageTrue,
+      PackageBackgroundColor,
+      PackageColor,
       AccountList,
       accountBackgroundColor,
       Color,
@@ -176,16 +336,100 @@ export default {
           </div>
         </div>
         <div class="nav-link" @click="ReservationList">
-          <div class="text-white" style="cursor: pointer;"> 
+          <div class="text-white" style="cursor: pointer;">
             <RouterLink to="/AdminReservationView"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-              fill="currentColor" class="bi bi-calendar-check-fill reserve-icon" viewBox="0 0 16 16"
-              style="color:#14243c ;">
-              <path
-                d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-5.146-5.146-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
-            </svg>
-            <div class="Account-modal">
-              Reservation Management
-            </div>
+                fill="currentColor" class="bi bi-calendar-check-fill reserve-icon" viewBox="0 0 16 16"
+                style="color:#14243c ;">
+                <path
+                  d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-5.146-5.146-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
+              </svg>
+              <div class="Account-modal">
+                Reservation Management
+              </div>
+            </RouterLink>
+          </div>
+        </div>
+        <div class="nav-link" @click="Boatdetails">
+          <div class="text-white" style="cursor: pointer;">
+            <RouterLink to="/BoatdetailsView"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                fill="currentColor" class="bi bi-calendar-check-fill reserve-icon" viewBox="0 0 16 16"
+                style="color:#14243c ;">
+                <path
+                  d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-5.146-5.146-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
+              </svg>
+              <div class="Account-modal">
+                Boat Details
+              </div>
+            </RouterLink>
+          </div>
+        </div>
+        <div class="nav-link" @click="Touristdestination">
+          <div class="text-white" style="cursor: pointer;">
+            <RouterLink to="/TouristdestinationView">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                class="bi bi-geo-fill Touristdestination-icon" viewBox="0 0 16 16" style="color:#14243c ;">
+                <path fill-rule="evenodd"
+                  d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z" />
+              </svg>
+              <div class="Account-modal">
+                Island Hopping Route
+              </div>
+            </RouterLink>
+          </div>
+        </div>
+        <div class="nav-link" @click="Package">
+          <div class="text-white" style="cursor: pointer;">
+            <RouterLink to="/PackageView">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                class="bi bi-box2-fill Package-icon" viewBox="0 0 16 16" style="color:#14243c ;">
+                <path
+                  d="M3.75 0a1 1 0 0 0-.8.4L.1 4.2a.5.5 0 0 0-.1.3V15a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V4.5a.5.5 0 0 0-.1-.3L13.05.4a1 1 0 0 0-.8-.4h-8.5ZM15 4.667V5H1v-.333L1.5 4h6V1h1v3h6l.5.667Z" />
+              </svg>
+              <div class="Account-modal">
+                Packages and Price
+              </div>
+            </RouterLink>
+          </div>
+        </div>
+        <div class="nav-link" @click="Announcement">
+          <div class="text-white" style="cursor: pointer;">
+            <RouterLink to="/AnnouncementView">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                class="bi bi-megaphone-fill announcement-icon" viewBox="0 0 16 16" style="color:#14243c ;">
+                <path
+                  d="M13 2.5a1.5 1.5 0 0 1 3 0v11a1.5 1.5 0 0 1-3 0v-11zm-1 .724c-2.067.95-4.539 1.481-7 1.656v6.237a25.222 25.222 0 0 1 1.088.085c2.053.204 4.038.668 5.912 1.56V3.224zm-8 7.841V4.934c-.68.027-1.399.043-2.008.053A2.02 2.02 0 0 0 0 7v2c0 1.106.896 1.996 1.994 2.009a68.14 68.14 0 0 1 .496.008 64 64 0 0 1 1.51.048zm1.39 1.081c.285.021.569.047.85.078l.253 1.69a1 1 0 0 1-.983 1.187h-.548a1 1 0 0 1-.916-.599l-1.314-2.48a65.81 65.81 0 0 1 1.692.064c.327.017.65.037.966.06z" />
+              </svg>
+              <div class="Account-modal">
+                Announcement
+              </div>
+            </RouterLink>
+          </div>
+        </div>
+        <div class="nav-link" @click="Maintenance">
+          <div class="text-white" style="cursor: pointer;">
+            <RouterLink to="/MaintenanceView">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                class="bi bi-tools maintenance-icon" viewBox="0 0 16 16" style="color:#14243c ;">
+                <path
+                  d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0Zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708ZM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11Z" />
+              </svg>
+              <div class="Account-modal">
+                Maintenance
+              </div>
+            </RouterLink>
+          </div>
+        </div>
+        <div class="nav-link" @click="Notification">
+          <div class="text-white" style="cursor: pointer;">
+            <RouterLink to="/NotificationView">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                class="bi bi-bell-fill notification-icon" viewBox="0 0 16 16" style="color:#14243c ;">
+                <path
+                  d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+              </svg>
+              <div class="Account-modal">
+                Notification
+              </div>
             </RouterLink>
           </div>
         </div>
@@ -234,6 +478,45 @@ export default {
           <div style="cursor: pointer;"><span :style="{ color: ReservationColor }"> Reservation Management</span></div>
         </div>
       </RouterLink>
+      <RouterLink to="/BoatdetailsView" style="text-decoration: none;">
+        <div class="nav-link" @click="Boatdetails" v-if="isBoatdetailsTrue"
+          :style="{ backgroundColor: BoatdetailsBackgroundColor }">
+          <div style="cursor: pointer;"><span :style="{ color: BoatdetailsColor }">Boat Details</span></div>
+        </div>
+      </RouterLink>
+      <RouterLink to="/TouristdestinationView" style="text-decoration: none;">
+        <div class="nav-link" @click="Touristdestination" v-if="isTouristdestinationTrue"
+          :style="{ backgroundColor: TouristdestinationBackgroundColor }">
+          <div style="cursor: pointer;"><span :style="{ color: TouristdestinationColor }">Island Hopping Route</span>
+          </div>
+        </div>
+      </RouterLink>
+      <RouterLink to="/PackageView" style="text-decoration: none;">
+        <div class="nav-link" @click="Package" v-if="isPackageTrue" :style="{ backgroundColor: PackageBackgroundColor }">
+          <div style="cursor: pointer;"><span :style="{ color: PackageColor }">Packages and Price</span></div>
+        </div>
+      </RouterLink>
+      <RouterLink to="/AnnouncementView" style="text-decoration: none;">
+        <div class="nav-link" @click="Announcement" v-if="isAnnouncementTrue"
+          :style="{ backgroundColor: AnnouncementBackgroundColor }">
+          <div style="cursor: pointer;"><span :style="{ color: AnnouncementColor }">Announcement</span></div>
+        </div>
+      </RouterLink>
+      <RouterLink to="/MaintenanceView" style="text-decoration: none;">
+        <div class="nav-link" @click="Maintenance" v-if="isMaintenanceTrue"
+          :style="{ backgroundColor: MaintenanceBackgroundColor }">
+          <div style="cursor: pointer; display:flex; justify-content:space-between;"><span
+              :style="{ color: MaintenanceColor }">Maintenance</span>
+          </div>
+        </div>
+      </RouterLink>
+      <RouterLink to="/NotificationView" style="text-decoration: none;">
+        <div class="nav-link" @click="Notification" v-if="isNotificationTrue"
+          :style="{ backgroundColor: NotificationBackgroundColor }">
+          <div style="cursor: pointer; display:flex; justify-content:space-between;"><span :style="{ color: NotificationColor }">Notification</span>
+          </div>
+        </div>
+      </RouterLink>
     </nav>
   </header>
 
@@ -280,7 +563,12 @@ export default {
 .reserve-icon:hover+.Account-modal,
 .tourist-icon:hover+.Account-modal,
 .tourguide-icon:hover+.Account-modal,
-.boat-icon:hover+.Account-modal {
+.boat-icon:hover+.Account-modal,
+.announcement-icon:hover+.Account-modal,
+.maintenance-icon:hover+.Account-modal,
+.notification-icon:hover+.Account-modal,
+.Touristdestination-icon:hover+.Account-modal,
+.Package-icon:hover+.Account-modal {
   display: block;
 }
 

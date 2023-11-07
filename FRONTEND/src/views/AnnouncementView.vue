@@ -1,13 +1,12 @@
 <script setup>
 import SidebarComponent from "../components/SidebarComponent.vue";
-import MaintenanceComponent from "../components/MaintenanceComponent.vue";
+import AnnouncementComponent from "../components/AnnouncementComponent.vue";
 
 </script>
 
 <template>
   <div>
-    
     <SidebarComponent></SidebarComponent>
-    <MaintenanceComponent></MaintenanceComponent>
+    <AnnouncementComponent></AnnouncementComponent>
 </div>
 </template>

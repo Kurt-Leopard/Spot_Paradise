@@ -8,6 +8,7 @@ import TOURGUIDECRUD from './tourguide.mjs';
 
 var app = express();
 app.use(cors());
+const port = 3000;
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
@@ -21,6 +22,9 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+
+
+
 
 
 app.post('/api/insert', upload.single('profilePicture'), async (req, res) => {
@@ -46,18 +50,26 @@ app.get('/api/get', async (req, res) => {
 
 
 
-// app.post('/api/update/:id', upload.single('profile'), async (req, res) => {
-//   const id = req.params.id;
-//   const { fname, lname, user, pass } = req.body;
-//   const profile = req.file ? req.file.filename : null;
 
-//   try {
-//     const result = await CRUD.updateData(id, fname, lname, user, pass, profile);
-//     res.json({ message: result });
-//   } catch (error) {
-//     res.status(500).json({ error });
-//   }
-// });
+app.put('/api/editTourist', upload.single('profilePicture'), async (req, res) => {
+  const {
+    firstName, lastName, email, dateOfBirth, gender, phone, address, Tourist_id
+  } = req.body;
+  const profilePicture = req.file ? req.file.filename : null;
+  try {
+    const result = await CRUD.editData({
+      firstName, lastName, email, dateOfBirth, gender, phone, address, profilePicture, Tourist_id
+    });
+    
+    console.log('Database update result:', result); // Add this line for logging
+    
+    res.json({ message: result });
+  } catch (error) {
+    console.error('Error in route handler:', error); // Add this line for logging
+    res.status(500).json({ error });
+  }
+});
+
 
 app.post('/api/delete/:id', async (req, res) => {
   const id = req.params.id;
@@ -70,10 +82,10 @@ app.post('/api/delete/:id', async (req, res) => {
   }
 });
 
-const port = 3000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+// const port = 3000;
+// app.listen(port, () => {
+//   console.log(`Server is running on port ${port}`);
+// });
 
 // api for boat owner
 
@@ -104,6 +116,7 @@ app.post('/api/insert/boatowner', upload.single('boat_owner_img'), async (req, r
       boat_owner_img,
     });
     res.json({ message: result });
+
   } catch (error) {
     res.status(500).json({ error });
   }
@@ -127,6 +140,8 @@ app.post('/api/deleteboatowner/:id', async (req, res) => {
     console.log(error);
   }
 });
+
+
 
 app.post('/api/editboatowner', upload.single('boat_owner_img'), async (req, res) => {
   const {
@@ -156,6 +171,7 @@ app.post('/api/editboatowner', upload.single('boat_owner_img'), async (req, res)
       boat_owner_img,
       boat_owner_id,
     });
+ 
     res.json({ message: result });
   } catch (error) {
     res.status(500).json({ error });
@@ -200,6 +216,7 @@ app.post('/api/insert/tourguide', upload.single('tg_img'), async (req, res) => {
       tg_cpnum,
       tg_img,
     });
+ 
     res.json({ message: result });
   } catch (error) {
     res.status(500).json({ error });
@@ -215,7 +232,10 @@ app.post('/api/deletetourguide/:id', async (req, res) => {
     console.log(error);
   }
 });
-app.post('/api/edittourguide', upload.single('tg_img'), async (req, res) => {
+
+
+
+app.put('/api/edittourguide', upload.single('tg_img'), async (req, res) => {
   const {
     tg_fname,
     tg_lname,
@@ -245,8 +265,13 @@ app.post('/api/edittourguide', upload.single('tg_img'), async (req, res) => {
       tg_img,
       tg_id,
     });
+    
     res.json({ message: result });
   } catch (error) {
     res.status(500).json({ error });
   }
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });

@@ -83,7 +83,7 @@
       <div class="card mx-4" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px">
         <div class="card-body">
           <div class="table-responsive" style="max-height: 450px; overflow-y: auto">
-            <table class="list table table-striped" style="width: 100%">
+            <table class="listOfBoatOwners table table-striped" style="width: 100%">
               <thead>
                 <tr>
                   <th>Id</th>
@@ -101,7 +101,8 @@
               <tbody>
                 <tr v-for="item in items" :key="item.boat_owner_id">
                   <td>{{ item.boat_owner_id }}</td>
-                  <td>{{ item.boat_owner_img }}</td>
+                  <td> <img :src="'./uploads/' + item.boat_owner_img" alt="" srcset="" style="height:35px;width:35px;" />
+                  </td>
                   <td>{{ item.boat_owner_fname }}</td>
                   <td>{{ item.boat_owner_lname }}</td>
                   <td>{{ item.boat_owner_email }}</td>
@@ -385,6 +386,9 @@ export default {
 
     onMounted(() => {
       fetchData();
+      $(document).ready(function () {
+        $(".listOfBoatOwners").DataTable();
+      });
     });
 
     return {
@@ -398,13 +402,6 @@ export default {
     };
   },
 };
-
-
-
-
-$(document).ready(function () {
-  $(".list").DataTable();
-});
 </script>
 
 <style scoped></style>

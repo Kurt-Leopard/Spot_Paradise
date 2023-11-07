@@ -28,34 +28,30 @@ async insertData(formData) {
   }
   
 
-//   async updateData(id, fname, lname, user, pass, profile) {
-//     try {
-//       let existingProfile = profile;
-      
-//       if (!profile) {
-//         const profileQuery = 'SELECT profile FROM admin WHERE id = ?';
-//         const profileResult = await db.query(profileQuery, [id]);
 
-//         if (profileResult.length > 0) {
-//           existingProfile = profileResult[0].profile;
-//         } else {
-//           throw 'Record not found';
-//         }
-//       }
+async editData(formDataEdit) {
+  const {
+    firstName, lastName, email, dateOfBirth, gender, phone, address, profilePicture, Tourist_id
+  } = formDataEdit;
 
-//       const updateQuery = 'UPDATE admin SET fname=?, lname=?, profile=?, user=?, pass=? WHERE id=?';
-//       const values = [fname, lname, existingProfile, user, pass, id];
+  const values = [firstName, lastName, email, dateOfBirth, gender, phone, address, profilePicture, Tourist_id];
 
-//       await db.query(updateQuery, values);
-//       return 'Data updated successfully';
-//     } catch (error) {
-//       console.error('Database query error:', error);
-//       throw 'Database query error';
-//     }
-//   }
+  const query = 'UPDATE touristaccount SET firstName = ?, lastName = ?,email = ?,dateOfBirth = ?,gender = ?,phone = ?, address = ?,profilePicture = ? WHERE  Tourist_id = ?';
+  
+  try {
+    await db.query(query, values);
+    return 'Data inserted successfully';
+  } catch (error) {
+    console.error('Database query error:', error);
+    throw 'Database query error';
+  }
+}
+
+
+
 
   async deleteData(id) {
-    const query = 'DELETE FROM touristaccount WHERE id=?';
+    const query = 'DELETE FROM touristaccount WHERE Tourist_id=?';
 
     try {
       await db.query(query, [id]);

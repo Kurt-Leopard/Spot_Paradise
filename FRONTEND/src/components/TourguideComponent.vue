@@ -108,7 +108,7 @@
               <tbody>
                 <tr v-for="item in items" :key="item.tg_id">
                   <td>{{ item.tg_id }}</td>
-                  <td>{{ item.tg_img }}</td>
+                  <td> <img :src="'./uploads/' + item.tg_img" alt="" srcset="" style="height:35px;width:35px;" /></td>
                   <td>{{ item.tg_fname }}</td>
                   <td>{{ item.tg_lname }}</td>
                   <td>{{ item.tg_email }}</td>
@@ -374,7 +374,7 @@ export default {
       formDataObject.append("tg_id", id);
 
 
-      axios.post(API_URL + 'api/edittourguide', formDataObject)
+      axios.put(API_URL + 'api/edittourguide', formDataObject)
         .then((response) => {
           alert('Edited successfully');
           fetchData();
@@ -399,6 +399,9 @@ export default {
 
     onMounted(() => {
       fetchData();
+      $(document).ready(function () {
+        $(".list").DataTable();
+      });
     });
 
     return {
@@ -413,12 +416,6 @@ export default {
   },
 };
 
-
-
-
-$(document).ready(function () {
-  $(".list").DataTable();
-});
 </script>
 <style scoped></style>
 

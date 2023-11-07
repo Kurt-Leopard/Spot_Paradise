@@ -32,6 +32,41 @@ const router = createRouter({
       name: 'AdminReservationView',
     
       component: () => import('../views/AdminReservationView.vue')
+    },
+    {
+      path: '/MaintenanceView',
+      name: 'MaintenanceView',
+    
+      component: () => import('../views/MaintenanceView.vue')
+    },{
+      path: '/BoatdetailsView',
+      name: 'BoatdetailsView',
+    
+      component: () => import('../views/BoatdetailsView.vue')
+    },
+    ,{
+      path: '/AnnouncementView',
+      name: 'AnnouncementView',
+    
+      component: () => import('../views/AnnouncementView.vue')
+    },
+    {
+      path: '/NotificationView',
+      name: 'NotificationView',
+    
+      component: () => import('../views/NotificationView.vue')
+    },
+    {
+      path: '/TouristdestinationView',
+      name: 'TouristdestinationView',
+    
+      component: () => import('../views/TouristdestinationView.vue')
+    },
+    {
+      path: '/PackageView',
+      name: 'PackageView',
+    
+      component: () => import('../views/PackageView.vue')
     }
   ]
 })

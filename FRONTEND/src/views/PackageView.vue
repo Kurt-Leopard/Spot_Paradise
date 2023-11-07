@@ -1,13 +1,11 @@
 <script setup>
 import SidebarComponent from "../components/SidebarComponent.vue";
-import MaintenanceComponent from "../components/MaintenanceComponent.vue";
-
+import PackageComponent from '../components/PackageComponent.vue'; 
 </script>
-
 <template>
-  <div>
-    
+  <div class="PackageComponent">
     <SidebarComponent></SidebarComponent>
-    <MaintenanceComponent></MaintenanceComponent>
-</div>
+    <PackageComponent></PackageComponent>
+  </div>
 </template>
+
