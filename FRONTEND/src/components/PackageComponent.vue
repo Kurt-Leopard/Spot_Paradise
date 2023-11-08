@@ -22,8 +22,8 @@
                         <div class="card-body">
                           <h5 class="card-title">Destination</h5>
                           <p class="card-text">Select one island destination.</p>
-                          <a href="#" class="btn btn-success my-1">1000 Half day</a>
-                          <a href="#" class="btn btn-primary">2000 Whole day</a>
+                          <p class="card-text">1000 Half day</p>
+                          <p class="card-text">2000 Whole day</p>
                         </div>
                       </div>
                     </td>
@@ -33,8 +33,8 @@
                         <div class="card-body">
                           <h5 class="card-title">Destination</h5>
                           <p class="card-text">Can select 2 island destination.</p>
-                          <a href="#" class="btn btn-success my-1">3000 Half day</a>
-                          <a href="#" class="btn btn-primary">4000 Whole day</a>
+                          <p class="card-text">3000 Half day</p>
+                          <p class="card-text">4000 Whole day</p>
                         </div>
                       </div>
                     </td>
@@ -44,7 +44,8 @@
                         <div class="card-body">
                           <h5 class="card-title">Destination</h5>
                           <p class="card-text">Gilutonga, nalusoan, and Olanggo.</p>
-                          <a href="#" class="btn btn-primary">6000 Whole day</a>
+                          <p class="card-text"></p>
+                          <p class="card-text">6000 Whole day</p>
                         </div>
                       </div>
                     </td>

@@ -2,6 +2,10 @@
   <nav class="navbar navbar-expand-sm head navbar-light bg-light" style="padding: 1px;position: fixed; width: 100vw; z-index: 5;">
     <div class="container-fluid" >
       <a class=" m-2 text-dark" href="#" style="text-decoration: none;">ADMINISTRATOR</a>
+      <div class="d-none d-sm-flex" style=" width:60%; display: flex; justify-content: end;">
+        <img src="/admin.png" alt="" srcset="" style="width:30px; height: 30px; margin-inline: 10px; border-radius: 50%;">
+        <span style="margin-inline: 10px;">Roger Kazaktan Tornado</span>
+      </div>
       <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>

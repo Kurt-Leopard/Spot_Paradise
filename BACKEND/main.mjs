@@ -50,7 +50,6 @@ class Server {
   }
 
   async handleInsert(req, res) {
-    // Handle insert logic for tourists
     const { firstName, lastName, email, dateOfBirth, gender, phone, address, tourist_del } = req.body;
     const profilePicture = req.file ? req.file.filename : null;
   

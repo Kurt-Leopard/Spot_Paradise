@@ -1,8 +1,7 @@
 <template>
     <section>
-      <!-- Button trigger modal -->
       <div  class="pt-5">
-        <button class="btn create-button m-4" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        <!-- <button class="btn create-button m-4" data-bs-toggle="modal" data-bs-target="#exampleModal"
           style="background:#003366;">
           <span class="button-text">Send Notif</span>
           <span class="plus-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
@@ -12,7 +11,6 @@
             </svg></span>
         </button>
   
-        <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content" style="max-height: 550px; overflow-y: auto">
@@ -61,9 +59,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
-      <div>
+      <div style="margin-top: 90px;">
         <div class="card mx-4" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px">
           <div class="card-body">
             <div class="table-responsive" style="max-height: 450px; overflow-y: auto">
@@ -78,7 +76,6 @@
                     <th>Gender</th>
                     <th>Phone</th>
                     <th>View</th>
-                    <th>Edit</th>
                     <th>Delete</th>
                   </tr>
                 </thead>
@@ -122,70 +119,6 @@
                               <div>{{ item.email }}</div>
                               <div>{{ item.gender }}</div>
                               <div>{{ item.phone }}</div>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                Close
-                              </button>
-                              <button type="button" class="btn btn-primary">
-                                Save changes
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <!-- Edit btn-->
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                        class="editBtn bi bi-pencil-square text-white bg-primary p-1 mx-1 rounded" viewBox="0 0 16 16"
-                        data-bs-toggle="modal" :data-bs-target="'#editmodal-' + item.id">
-                        <path
-                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                        <path fill-rule="evenodd"
-                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                      </svg>
-                      <!-- Edit modal -->
-                      <div class="modal fade" :id="'editmodal-' + item.id" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content" style="max-height: 550px; overflow-y: auto">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">
-                                Edit Information
-                              </h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                              <form>
-                                <div class="mb-3">
-                                  <label for="profile" class="form-label">Profile</label>
-                                  <input type="file" id="profilePicture" name="profile" class="form-control" />
-                                </div>
-                                <div class="mb-3">
-                                  <label for="firstName" class="form-label">First Name</label>
-                                  <input type="text" class="form-control" id="firstName" v-model="item.firstName" />
-                                </div>
-                                <div class="mb-3">
-                                  <label for="lastName" class="form-label">Last Name</label>
-                                  <input type="text" class="form-control" id="lastName" v-model="item.lastName" />
-                                </div>
-                                <div class="mb-3">
-                                  <label for="email" class="form-label">Email</label>
-                                  <input type="email" class="form-control" id="email" v-model="item.email" />
-                                </div>
-                                <div class="mb-3">
-                                  <label for="gender" class="form-label">Gender</label>
-                                  <select class="form-select" id="gender" v-model="item.gender">
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                  </select>
-                                </div>
-                                <div class="mb-3">
-                                  <label for="phone" class="form-label">Phone</label>
-                                  <input type="text" class="form-control" id="phone" v-model="item.phone" />
-                                </div>
-                              </form>
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
