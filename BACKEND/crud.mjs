@@ -3,9 +3,10 @@ import db from './db.mjs';
 class CRUD {
 
 async insertData(formData) {
-    const { firstName, lastName, email, dateOfBirth, gender, phone, address, profilePicture ,tourist_del} = formData;
+    const { firstName, lastName, email, dateOfBirth, gender, phone, address, profilePicture} = formData;
     const query = 'INSERT INTO touristaccount (firstName, lastName, email, dateOfBirth, gender, phone, address, profilePicture,tourist_del) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)';
-    const values = [firstName, lastName, email, dateOfBirth, gender, phone, address,profilePicture,tourist_del ];
+    // const query = 'CALL add_tourist(?,?,?,?,?,?,?,?)'
+    const values = [firstName, lastName, email, dateOfBirth, gender, phone, address,profilePicture];
   
     try {
       await db.query(query, values);
@@ -16,10 +17,9 @@ async insertData(formData) {
     }
   }
   async getData() {
-    const query = 'SELECT * FROM touristaccount'; // You can adjust the SQL query to fetch data based on your database schema.
-    
+    const query = 'CALL show_tourist()'; // You can adjust the SQL query to fetch data based on your database schema.
     try {
-      const result = await db.query(query);
+      const [result] = await db.query(query);
       return result; // You may need to format the result as needed before returning it.
     } catch (error) {
       console.error('Database query error:', error);
@@ -51,7 +51,8 @@ async editData(formDataEdit) {
 
 
   async deleteData(id) {
-    const query = 'DELETE FROM touristaccount WHERE Tourist_id=?';
+    // const query = 'DELETE FROM touristaccount WHERE id=?';
+    const query = 'CALL del_tourist(?)';
 
     try {
       await db.query(query, [id]);

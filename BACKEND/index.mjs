@@ -125,6 +125,7 @@ app.post('/api/insert/boatowner', upload.single('boat_owner_img'), async (req, r
 app.get('/api/getboatowner', async (req, res) => {
   try {
     const data = await BOATOWNERCRUD.getData();
+    
     res.json(data);
   } catch (error) {
     res.status(500).json({ error: 'Error fetching data' });
