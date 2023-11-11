@@ -169,7 +169,7 @@
                             </div>
                             <div class="modal-body">
                               <form @submit.prevent="saveChangesUpdate(item.Tourist_id)" enctype="multipart/form-data">
-                                
+
                                 <div class="mb-3">
                                   <label for="profile" class="form-label">Profile Picture</label>
                                   <input type="file" id="profilePicture" name="profile" class="form-control"
@@ -273,12 +273,39 @@
 </template>
   
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, nextTick } from "vue";
 import axios from 'axios'
-const API_URL = "http://localhost:3000/";
+
 
 export default {
   setup() {
+    const items = ref([]);
+
+    const clientIP = ref('');
+
+    let API_URL = "";
+
+    const fetchClientIP = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/get-local-ip');
+        clientIP.value = response.data;
+        // console.log(clientIP.value['localIpAddress']);
+        API_URL = `http://${clientIP.value['localIpAddress']}:3000/`;
+       console.log(API_URL);
+      } catch (error) {
+        console.error('Error fetching client IP:', error);
+      }
+    };
+
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(API_URL + 'api/get');
+        items.value = response.data;
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
     const formData = {
       firstName: ref(''),
       lastName: ref(''),
@@ -321,16 +348,7 @@ export default {
         });
     };
 
-    const items = ref([]);
 
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(API_URL + 'api/get');
-        items.value = response.data;
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
     // To set dafualt value in the Edit form of tourist
     const formDataEdit = {
       firstName: ref(''),
@@ -366,7 +384,7 @@ export default {
       axios
         .put(API_URL + 'api/editTourist', formDataObject)
         .then((response) => {
-          
+
           alert('Updated successfully');
           fetchData();
         })
@@ -374,15 +392,22 @@ export default {
           console.error('Error inserting data:', error);
         });
     };
+    const datatable = () => {
 
+      $(".list").DataTable();
+
+    }
     onMounted(() => {
-      fetchData();
-      $(document).ready(function () {
-        $(".list").DataTable();
+      fetchClientIP();
+      console.log('Component mounted');
+      fetchData().then(() => {
+        datatable();
       });
+
     });
 
     return {
+      clientIP,
       items,
       formData,
       formDataEdit,
@@ -391,6 +416,8 @@ export default {
       fetchData,
       handleUpdateFileUpload,
       saveChangesUpdate,
+      datatable,
+      fetchClientIP,
     };
   },
 };

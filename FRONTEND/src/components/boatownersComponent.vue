@@ -101,7 +101,7 @@
               <tbody>
                 <tr v-for="item in items" :key="item.boat_owner_id">
                   <td>{{ item.boat_owner_id }}</td>
-                  <td> <img :src="'./uploads/' + item.boat_owner_img" alt="" srcset="" style="height:35px;width:35px;" />
+                  <td> <img :src="'./uploads/' + item.boat_owner_img"  style="height:35px;width:35px;" />
                   </td>
                   <td>{{ item.boat_owner_fname }}</td>
                   <td>{{ item.boat_owner_lname }}</td>
@@ -289,7 +289,7 @@
 <script>
 import { ref, onMounted } from "vue";
 import axios from 'axios';
-const API_URL = "http://localhost:3000/";
+const API_URL = "http://192.168.1.18:3000/";
 
 export default {
   setup() {
