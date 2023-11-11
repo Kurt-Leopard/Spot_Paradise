@@ -16,9 +16,8 @@ class CRUD {
             tg_cpnum,
             tg_img,
         } = formData;
-    const tg_del = true;
-    const query = 'INSERT INTO `tour_guide`(`tg_id`, `tg_fname`, `tg_lname`, `tg_mname`, `tg_email`, `tg_address`, `tg_gender`, `tg_dob`, `tg_status`,`tg_img`,`tg_nationality`, `tg_cpnum`, `tg_del`) VALUES (null,?,?,?,?,?,?,?,?,?,?,?,?)';
-    const values = [tg_fname, tg_lname, tg_mname, tg_email, tg_address, tg_gender, tg_dob,tg_status,tg_img, tg_nationality, tg_cpnum, tg_del];
+    const query = 'CALL add_tour_guide(?,?,?,?,?,?,?,?,?,?,?)';
+    const values = [tg_fname, tg_lname, tg_mname, tg_email, tg_address, tg_gender, tg_dob,tg_status,tg_img, tg_nationality, tg_cpnum];
         try {
             await db.query(query, values);
             return 'Data inserted successfully';
@@ -28,9 +27,9 @@ class CRUD {
         }
     }
     async getData() {
-        const query = 'SELECT * FROM tour_guide WHERE tg_del = 1';
+        const query = 'CALL show_tour_guide()';
         try {
-            const result  = await db.query(query);
+            const [result]  = await db.query(query);
             return result;
         } catch (error) {
             console.error("Error->", error);
@@ -53,8 +52,8 @@ class CRUD {
             tg_id
         } = formData;
     const values = [tg_fname, tg_lname, tg_mname, tg_email, tg_address, tg_gender, tg_dob,tg_status, tg_nationality, tg_cpnum, tg_img, tg_id];
-
-    const query = 'UPDATE tour_guide SET tg_fname=?,tg_lname=?,tg_mname=?,tg_email=?,tg_address=?,tg_gender=?,tg_dob=?,tg_status=?,tg_nationality=?,tg_cpnum=?,tg_img=? WHERE tg_id = ?';
+    const query = 'CALL edit_tour_guide(?,?,?,?,?,?,?,?,?,?,?,?)';
+    // const query = 'UPDATE tour_guide SET tg_fname=?,tg_lname=?,tg_mname=?,tg_email=?,tg_address=?,tg_gender=?,tg_dob=?,tg_status=?,tg_nationality=?,tg_cpnum=?,tg_img=? WHERE tg_id = ?';
         try {
             await db.query(query, values);
             return 'Data inserted successfully';
@@ -64,7 +63,7 @@ class CRUD {
         }
     }
     async deleteData(id) {
-        const query = 'UPDATE tour_guide SET tg_del = false WHERE tour_guide.tg_id = ?';
+        const query = 'CALL del_tour_guide(?)';
         try {
             await db.query(query, [id]);
             console.log("Data is deleted!");
