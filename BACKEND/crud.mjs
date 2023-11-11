@@ -4,8 +4,8 @@ class CRUD {
 
 async insertData(formData) {
     const { firstName, lastName, email, dateOfBirth, gender, phone, address, profilePicture} = formData;
-    const query = 'INSERT INTO touristaccount (firstName, lastName, email, dateOfBirth, gender, phone, address, profilePicture,tourist_del) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)';
-    // const query = 'CALL add_tourist(?,?,?,?,?,?,?,?)'
+    // const query = 'INSERT INTO tourist (firstName, lastName, email, dateOfBirth, gender, phone, address, profilePicture,tourist_del) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)';
+    const query = 'CALL add_tourist(?,?,?,?,?,?,?,?)'
     const values = [firstName, lastName, email, dateOfBirth, gender, phone, address,profilePicture];
   
     try {

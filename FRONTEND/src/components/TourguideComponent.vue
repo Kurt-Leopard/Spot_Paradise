@@ -295,127 +295,130 @@
   </section>
 </template>
   
-<script>
+<script setup>
 import { ref, onMounted } from "vue";
 import axios from 'axios';
 
-const API_URL = "http://localhost:3000/";
+const clientIP = ref('');
 
-export default {
-  setup() {
+let API_URL = "http://localhost:3000/";
 
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(API_URL + 'api/gettourguide');
-        items.value = response.data;
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    const formData = {
-      tg_fname: ref(''),
-      tg_lname: ref(''),
-      tg_mname: ref(''),
-      tg_email: ref(''),
-      tg_address: ref(''),
-      tg_gender: ref(''),
-      tg_dob: ref(''),
-      tg_status: ref(''),
-      tg_nationality: ref(''),
-      tg_cpnum: ref(''),
-      tg_img: null,
-    };
-
-    const handleFileUpload = (event) => {
-      formData.tg_img = event.target.files[0];
-    };
-
-    const saveChanges = async () => {
-      const formDataObject = new FormData();
-
-      formDataObject.append("tg_fname", formData.tg_fname.value);
-      formDataObject.append("tg_lname", formData.tg_lname.value);
-      formDataObject.append("tg_mname", formData.tg_mname.value);
-      formDataObject.append("tg_email", formData.tg_email.value);
-      formDataObject.append("tg_address", formData.tg_address.value);
-      formDataObject.append("tg_gender", formData.tg_gender.value);
-      formDataObject.append("tg_dob", formData.tg_dob.value);
-      formDataObject.append("tg_status", formData.tg_status.value);
-      formDataObject.append("tg_nationality", formData.tg_nationality.value);
-      formDataObject.append("tg_cpnum", formData.tg_cpnum.value);
-      formDataObject.append("tg_img", formData.tg_img);
-
-
-      axios.post(API_URL + 'api/insert/tourguide', formDataObject)
-        .then((response) => {
-          alert('Inserted successfully');
-          fetchData();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-
-    const editData = (id) => {
-      const formDataObject = new FormData();
-
-      formDataObject.append("tg_fname", formData.tg_fname.value);
-      formDataObject.append("tg_lname", formData.tg_lname.value);
-      formDataObject.append("tg_mname", formData.tg_mname.value);
-      formDataObject.append("tg_email", formData.tg_email.value);
-      formDataObject.append("tg_address", formData.tg_address.value);
-      formDataObject.append("tg_gender", formData.tg_gender.value);
-      formDataObject.append("tg_nationality", formData.tg_nationality.value);
-      formDataObject.append("tg_dob", formData.tg_dob.value);
-      formDataObject.append("tg_status", formData.tg_status.value);
-      formDataObject.append("tg_cpnum", formData.tg_cpnum.value);
-      formDataObject.append("tg_img", formData.tg_img);
-      formDataObject.append("tg_id", id);
-
-
-      axios.put(API_URL + 'api/edittourguide', formDataObject)
-        .then((response) => {
-          alert('Edited successfully');
-          fetchData();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-
-    const deleteData = (id) => {
-      axios
-        .post(API_URL + 'api/deletetourguide/' + id)
-        .then((response) => {
-          alert('Deleted successfully', +id);
-          fetchData();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-    const items = ref([]);
-
-    onMounted(() => {
-      fetchData();
-      $(document).ready(function () {
-        $(".list").DataTable();
-      });
-    });
-
-    return {
-      items,
-      formData,
-      saveChanges,
-      handleFileUpload,
-      fetchData,
-      editData,
-      deleteData
-    };
-  },
+const fetchClientIP = async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/get-local-ip');
+    clientIP.value = response.data;
+    // console.log(clientIP.value['localIpAddress']);
+    // API_URL = `http://${clientIP.value['localIpAddress']}:3000/`;
+    console.log(API_URL);
+  } catch (error) {
+    console.error('Error fetching client IP:', error);
+  }
 };
 
+const fetchData = async () => {
+  try {
+    const response = await axios.get(API_URL + 'api/gettourguide');
+    items.value = response.data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+const formData = {
+  tg_fname: ref(''),
+  tg_lname: ref(''),
+  tg_mname: ref(''),
+  tg_email: ref(''),
+  tg_address: ref(''),
+  tg_gender: ref(''),
+  tg_dob: ref(''),
+  tg_status: ref(''),
+  tg_nationality: ref(''),
+  tg_cpnum: ref(''),
+  tg_img: null,
+};
+
+const handleFileUpload = (event) => {
+  formData.tg_img = event.target.files[0];
+};
+
+const saveChanges = async () => {
+  const formDataObject = new FormData();
+
+  formDataObject.append("tg_fname", formData.tg_fname.value);
+  formDataObject.append("tg_lname", formData.tg_lname.value);
+  formDataObject.append("tg_mname", formData.tg_mname.value);
+  formDataObject.append("tg_email", formData.tg_email.value);
+  formDataObject.append("tg_address", formData.tg_address.value);
+  formDataObject.append("tg_gender", formData.tg_gender.value);
+  formDataObject.append("tg_dob", formData.tg_dob.value);
+  formDataObject.append("tg_status", formData.tg_status.value);
+  formDataObject.append("tg_nationality", formData.tg_nationality.value);
+  formDataObject.append("tg_cpnum", formData.tg_cpnum.value);
+  formDataObject.append("tg_img", formData.tg_img);
+
+
+  axios.post(API_URL + 'api/insert/tourguide', formDataObject)
+    .then((response) => {
+      alert('Inserted successfully');
+      fetchData();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+const editData = (id) => {
+  const formDataObject = new FormData();
+
+  formDataObject.append("tg_fname", formData.tg_fname.value);
+  formDataObject.append("tg_lname", formData.tg_lname.value);
+  formDataObject.append("tg_mname", formData.tg_mname.value);
+  formDataObject.append("tg_email", formData.tg_email.value);
+  formDataObject.append("tg_address", formData.tg_address.value);
+  formDataObject.append("tg_gender", formData.tg_gender.value);
+  formDataObject.append("tg_nationality", formData.tg_nationality.value);
+  formDataObject.append("tg_dob", formData.tg_dob.value);
+  formDataObject.append("tg_status", formData.tg_status.value);
+  formDataObject.append("tg_cpnum", formData.tg_cpnum.value);
+  formDataObject.append("tg_img", formData.tg_img);
+  formDataObject.append("tg_id", id);
+
+
+  axios.put(API_URL + 'api/edittourguide', formDataObject)
+    .then((response) => {
+      alert('Edited successfully');
+      fetchData();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+const deleteData = (id) => {
+  axios
+    .post(API_URL + 'api/deletetourguide/' + id)
+    .then((response) => {
+      alert('Deleted successfully', +id);
+      fetchData();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+const items = ref([]);
+const datatable = () => {
+
+  $(".list").DataTable();
+
+}
+onMounted(() => {
+  fetchClientIP();
+  console.log('Component mounted');
+  fetchData().then(() => {
+    datatable();
+  });
+});
 </script>
 <style scoped></style>
 

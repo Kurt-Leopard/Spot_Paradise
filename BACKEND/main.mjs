@@ -71,7 +71,6 @@ class Server {
       res.status(500).json({ error });
     }
   }
-
   async handleGet(req, res) {
     try {
       const data = await CRUD.getData();
@@ -81,7 +80,6 @@ class Server {
     }
     
   }
-
   async handleEditTourist(req, res) {
     const {
       firstName, lastName, email, dateOfBirth, gender, phone, address, Tourist_id
@@ -100,7 +98,6 @@ class Server {
       res.status(500).json({ error });
     }
   }
-
   async handleDelete(req, res) {
     const id = req.params.id;
 
@@ -112,51 +109,183 @@ class Server {
     }
   }
 
+    // functions for boat owner
   async handleInsertBoatOwner(req, res) {
-    // Handle insert logic for boat owners
-    // Use BOATOWNERCRUD.insertData() method
+    const {
+      boat_owner_fname,
+      boat_owner_lname,
+      boat_owner_mname,
+      boat_owner_email,
+      boat_owner_address,
+      boat_owner_gender,
+      boat_owner_dob,
+      boat_owner_nationality,
+      boat_owner_cpnum
+    } = req.body;
+    const boat_owner_img = req.file ? req.file.filename : null;
+    try {
+      const result = await BOATOWNERCRUD.insertData({
+        boat_owner_fname,
+        boat_owner_lname,
+        boat_owner_mname,
+        boat_owner_email,
+        boat_owner_address,
+        boat_owner_gender,
+        boat_owner_dob,
+        boat_owner_nationality,
+        boat_owner_cpnum,
+        boat_owner_img,
+      });
+      res.json({ message: result });
+  
+    } catch (error) {
+      res.status(500).json({ error });
+    }
   }
-
   async handleGetBoatOwner(req, res) {
-    // Handle get logic for boat owners
-    // Use BOATOWNERCRUD.getData() method
+    try {
+      const data = await BOATOWNERCRUD.getData();
+      
+      res.json(data);
+    } catch (error) {
+      res.status(500).json({ error: 'Error fetching data' });
+    }
   }
-
   async handleEditBoatOwner(req, res) {
-    // Handle edit logic for boat owners
-    // Use BOATOWNERCRUD.editData() method
+    const {
+      boat_owner_fname,
+      boat_owner_lname,
+      boat_owner_mname,
+      boat_owner_email,
+      boat_owner_address,
+      boat_owner_gender,
+      boat_owner_dob,
+      boat_owner_nationality,
+      boat_owner_cpnum,
+      boat_owner_id
+    } = req.body;
+    const boat_owner_img = req.file ? req.file.filename : null;
+    try {
+      const result = await BOATOWNERCRUD.editData({
+        boat_owner_fname,
+        boat_owner_lname,
+        boat_owner_mname,
+        boat_owner_email,
+        boat_owner_address,
+        boat_owner_gender,
+        boat_owner_dob,
+        boat_owner_nationality,
+        boat_owner_cpnum,
+        boat_owner_img,
+        boat_owner_id,
+      });
+   
+      res.json({ message: result });
+    } catch (error) {
+      res.status(500).json({ error });
+    }
   }
-
   async handleDeleteBoatOwner(req, res) {
-    // Handle delete logic for boat owners
-    // Use BOATOWNERCRUD.deleteData() method
+    const id = req.params.id;
+    try {
+      const result = await BOATOWNERCRUD.deleteData(id);
+      res.json({ message: result });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
+  // functions for tour guide
   async handleInsertTourGuide(req, res) {
-    // Handle insert logic for tour guides
-    // Use TOURGUIDECRUD.insertData() method
+    const {
+      tg_fname,
+      tg_lname,
+      tg_mname,
+      tg_email,
+      tg_address,
+      tg_gender,
+      tg_dob,
+      tg_status,
+      tg_nationality,
+      tg_cpnum
+    } = req.body;
+    const tg_img = req.file ? req.file.filename : null;
+    try {
+      const result = await TOURGUIDECRUD.insertData({
+        tg_fname,
+        tg_lname,
+        tg_mname,
+        tg_email,
+        tg_address,
+        tg_gender,
+        tg_dob,
+        tg_status,
+        tg_nationality,
+        tg_cpnum,
+        tg_img,
+      });
+   
+      res.json({ message: result });
+    } catch (error) {
+      res.status(500).json({ error });
+    }
   }
-
   async handleGetTourGuide(req, res) {
-    // Handle get logic for tour guides
-    // Use TOURGUIDECRUD.getData() method
+  try {
+    const data = await TOURGUIDECRUD.getData();
+    res.json(data);
+  } catch (error) {
+    console.log(error);
   }
-
+  }
   async handleEditTourGuide(req, res) {
-    // Handle edit logic for tour guides
-    // Use TOURGUIDECRUD.editData() method
+    const {
+      tg_fname,
+      tg_lname,
+      tg_mname,
+      tg_email,
+      tg_address,
+      tg_gender,
+      tg_dob,
+      tg_status,
+      tg_nationality,
+      tg_cpnum,
+      tg_id
+    } = req.body;
+    const tg_img = req.file ? req.file.filename : null;
+    try {
+      const result = await TOURGUIDECRUD.editData({
+        tg_fname,
+        tg_lname,
+        tg_mname,
+        tg_email,
+        tg_address,
+        tg_gender,
+        tg_dob,
+        tg_status,
+        tg_nationality,
+        tg_cpnum,
+        tg_img,
+        tg_id,
+      });
+      
+      res.json({ message: result });
+    } catch (error) {
+      res.status(500).json({ error });
+    }
   }
-
   async handleDeleteTourGuide(req, res) {
-    // Handle delete logic for tour guides
-    // Use TOURGUIDECRUD.deleteData() method
+    const id = req.params.id;
+    try {
+      const result = await TOURGUIDECRUD.deleteData(id);
+      res.json({ message: result });
+    } catch (error) {
+      console.log(error);
+    }
   }
-
 async handleIPconfig(req,res){
-
   const localIpAddress = ip.address();
   res.json({ localIpAddress });
-  
   }
   
 

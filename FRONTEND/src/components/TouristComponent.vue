@@ -272,25 +272,22 @@
   </section>
 </template>
   
-<script>
+<script setup>
 import { ref, onMounted, nextTick } from "vue";
 import axios from 'axios'
 
-
-export default {
-  setup() {
     const items = ref([]);
 
     const clientIP = ref('');
 
-    let API_URL = "";
+    let API_URL = "http://localhost:3000/";
 
     const fetchClientIP = async () => {
       try {
         const response = await axios.get('http://localhost:3000/get-local-ip');
         clientIP.value = response.data;
         // console.log(clientIP.value['localIpAddress']);
-        API_URL = `http://${clientIP.value['localIpAddress']}:3000/`;
+        // API_URL = `http://${clientIP.value['localIpAddress']}:3000/`;
        console.log(API_URL);
       } catch (error) {
         console.error('Error fetching client IP:', error);
@@ -403,24 +400,7 @@ export default {
       fetchData().then(() => {
         datatable();
       });
-
     });
-
-    return {
-      clientIP,
-      items,
-      formData,
-      formDataEdit,
-      saveChanges,
-      handleFileUpload,
-      fetchData,
-      handleUpdateFileUpload,
-      saveChangesUpdate,
-      datatable,
-      fetchClientIP,
-    };
-  },
-};
 </script>
 <style scoped></style>
 

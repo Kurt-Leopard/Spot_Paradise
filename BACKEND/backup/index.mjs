@@ -2,9 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import multer from 'multer';
 import path from 'path';
-import CRUD from './crud.mjs';
-import BOATOWNERCRUD from './boatowner.mjs';
-import TOURGUIDECRUD from './tourguide.mjs';
+import CRUD from '../crud.mjs';
+import BOATOWNERCRUD from '../boatowner.mjs';
+import TOURGUIDECRUD from '../tourguide.mjs';
 
 var app = express();
 app.use(cors());
@@ -38,7 +38,6 @@ app.post('/api/insert', upload.single('profilePicture'), async (req, res) => {
     res.status(500).json({ error });
   }
 });
-
 app.get('/api/get', async (req, res) => {
   try {
     const data = await CRUD.getData();
@@ -47,10 +46,6 @@ app.get('/api/get', async (req, res) => {
     res.status(500).json({ error: 'Error fetching data' });
   }
 });
-
-
-
-
 app.put('/api/editTourist', upload.single('profilePicture'), async (req, res) => {
   const {
     firstName, lastName, email, dateOfBirth, gender, phone, address, Tourist_id
@@ -69,8 +64,6 @@ app.put('/api/editTourist', upload.single('profilePicture'), async (req, res) =>
     res.status(500).json({ error });
   }
 });
-
-
 app.post('/api/delete/:id', async (req, res) => {
   const id = req.params.id;
 
@@ -131,7 +124,6 @@ app.get('/api/getboatowner', async (req, res) => {
     res.status(500).json({ error: 'Error fetching data' });
   }
 });
-
 app.post('/api/deleteboatowner/:id', async (req, res) => {
   const id = req.params.id;
   try {
@@ -141,9 +133,6 @@ app.post('/api/deleteboatowner/:id', async (req, res) => {
     console.log(error);
   }
 });
-
-
-
 app.post('/api/editboatowner', upload.single('boat_owner_img'), async (req, res) => {
   const {
     boat_owner_fname,
@@ -180,7 +169,6 @@ app.post('/api/editboatowner', upload.single('boat_owner_img'), async (req, res)
 });
 
 //  end of api boat owner , starting point of api for tourguide
-
 app.get('/api/gettourguide', async (req, res) => {
   try {
     const data = await TOURGUIDECRUD.getData();
@@ -223,7 +211,6 @@ app.post('/api/insert/tourguide', upload.single('tg_img'), async (req, res) => {
     res.status(500).json({ error });
   }
 });
-
 app.post('/api/deletetourguide/:id', async (req, res) => {
   const id = req.params.id;
   try {
@@ -233,9 +220,6 @@ app.post('/api/deletetourguide/:id', async (req, res) => {
     console.log(error);
   }
 });
-
-
-
 app.put('/api/edittourguide', upload.single('tg_img'), async (req, res) => {
   const {
     tg_fname,

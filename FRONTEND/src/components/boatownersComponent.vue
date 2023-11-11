@@ -101,7 +101,7 @@
               <tbody>
                 <tr v-for="item in items" :key="item.boat_owner_id">
                   <td>{{ item.boat_owner_id }}</td>
-                  <td> <img :src="'./uploads/' + item.boat_owner_img"  style="height:35px;width:35px;" />
+                  <td> <img :src="'./uploads/' + item.boat_owner_img" style="height:35px;width:35px;" />
                   </td>
                   <td>{{ item.boat_owner_fname }}</td>
                   <td>{{ item.boat_owner_lname }}</td>
@@ -286,122 +286,126 @@
     </div>
   </section>
 </template>
-<script>
+<script setup>
 import { ref, onMounted } from "vue";
 import axios from 'axios';
-const API_URL = "http://192.168.1.18:3000/";
+const clientIP = ref('');
 
-export default {
-  setup() {
+let API_URL = "http://localhost:3000/";
 
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(API_URL + 'api/getboatowner');
-        items.value = response.data;
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    const formData = {
-      boat_owner_fname: ref(''),
-      boat_owner_lname: ref(''),
-      boat_owner_mname: ref(''),
-      boat_owner_email: ref(''),
-      boat_owner_address: ref(''),
-      boat_owner_gender: ref(''),
-      boat_owner_dob: ref(''),
-      boat_owner_nationality: ref(''),
-      boat_owner_cpnum: ref(''),
-      boat_owner_img: null,
-    };
-
-    const handleFileUpload = (event) => {
-      formData.boat_owner_img = event.target.files[0];
-    };
-
-    const saveChanges = async () => {
-      const formDataObject = new FormData();
-
-      formDataObject.append("boat_owner_fname", formData.boat_owner_fname.value);
-      formDataObject.append("boat_owner_lname", formData.boat_owner_lname.value);
-      formDataObject.append("boat_owner_mname", formData.boat_owner_mname.value);
-      formDataObject.append("boat_owner_email", formData.boat_owner_email.value);
-      formDataObject.append("boat_owner_address", formData.boat_owner_address.value);
-      formDataObject.append("boat_owner_gender", formData.boat_owner_gender.value);
-      formDataObject.append("boat_owner_nationality", formData.boat_owner_nationality.value);
-      formDataObject.append("boat_owner_dob", formData.boat_owner_dob.value);
-      formDataObject.append("boat_owner_cpnum", formData.boat_owner_cpnum.value);
-      formDataObject.append("boat_owner_img", formData.boat_owner_img);
-
-
-      axios.post(API_URL + 'api/insert/boatowner', formDataObject)
-        .then((response) => {
-          alert('Inserted successfully');
-          fetchData();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-
-    const editData = (id) => {
-      const formDataObject = new FormData();
-
-      formDataObject.append("boat_owner_fname", formData.boat_owner_fname.value);
-      formDataObject.append("boat_owner_lname", formData.boat_owner_lname.value);
-      formDataObject.append("boat_owner_mname", formData.boat_owner_mname.value);
-      formDataObject.append("boat_owner_email", formData.boat_owner_email.value);
-      formDataObject.append("boat_owner_address", formData.boat_owner_address.value);
-      formDataObject.append("boat_owner_gender", formData.boat_owner_gender.value);
-      formDataObject.append("boat_owner_nationality", formData.boat_owner_nationality.value);
-      formDataObject.append("boat_owner_dob", formData.boat_owner_dob.value);
-      formDataObject.append("boat_owner_cpnum", formData.boat_owner_cpnum.value);
-      formDataObject.append("boat_owner_img", formData.boat_owner_img);
-      formDataObject.append("boat_owner_id", id);
-
-
-      axios.post(API_URL + 'api/editboatowner', formDataObject)
-        .then((response) => {
-          alert('Edited successfully');
-          fetchData();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-
-    const deleteData = (id) => {
-      axios
-        .post(API_URL + 'api/deleteboatowner/' + id)
-        .then((response) => {
-          alert('Deleted successfully');
-          fetchData();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-    const items = ref([]);
-
-    onMounted(() => {
-      fetchData();
-      $(document).ready(function () {
-        $(".listOfBoatOwners").DataTable();
-      });
-    });
-
-    return {
-      items,
-      formData,
-      saveChanges,
-      handleFileUpload,
-      fetchData,
-      editData,
-      deleteData
-    };
-  },
+const fetchClientIP = async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/get-local-ip');
+    clientIP.value = response.data;
+    // console.log(clientIP.value['localIpAddress']);
+    // API_URL = `http://${clientIP.value['localIpAddress']}:3000/`;
+    console.log(API_URL);
+  } catch (error) {
+    console.error('Error fetching client IP:', error);
+  }
 };
+
+const fetchData = async () => {
+  try {
+    const response = await axios.get(API_URL + 'api/getboatowner');
+    items.value = response.data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+const formData = {
+  boat_owner_fname: ref(''),
+  boat_owner_lname: ref(''),
+  boat_owner_mname: ref(''),
+  boat_owner_email: ref(''),
+  boat_owner_address: ref(''),
+  boat_owner_gender: ref(''),
+  boat_owner_dob: ref(''),
+  boat_owner_nationality: ref(''),
+  boat_owner_cpnum: ref(''),
+  boat_owner_img: null,
+};
+
+const handleFileUpload = (event) => {
+  formData.boat_owner_img = event.target.files[0];
+};
+
+const saveChanges = async () => {
+  const formDataObject = new FormData();
+
+  formDataObject.append("boat_owner_fname", formData.boat_owner_fname.value);
+  formDataObject.append("boat_owner_lname", formData.boat_owner_lname.value);
+  formDataObject.append("boat_owner_mname", formData.boat_owner_mname.value);
+  formDataObject.append("boat_owner_email", formData.boat_owner_email.value);
+  formDataObject.append("boat_owner_address", formData.boat_owner_address.value);
+  formDataObject.append("boat_owner_gender", formData.boat_owner_gender.value);
+  formDataObject.append("boat_owner_nationality", formData.boat_owner_nationality.value);
+  formDataObject.append("boat_owner_dob", formData.boat_owner_dob.value);
+  formDataObject.append("boat_owner_cpnum", formData.boat_owner_cpnum.value);
+  formDataObject.append("boat_owner_img", formData.boat_owner_img);
+
+
+  axios.post(API_URL + 'api/insert/boatowner', formDataObject)
+    .then((response) => {
+      alert('Inserted successfully');
+      fetchData();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+const editData = (id) => {
+  const formDataObject = new FormData();
+
+  formDataObject.append("boat_owner_fname", formData.boat_owner_fname.value);
+  formDataObject.append("boat_owner_lname", formData.boat_owner_lname.value);
+  formDataObject.append("boat_owner_mname", formData.boat_owner_mname.value);
+  formDataObject.append("boat_owner_email", formData.boat_owner_email.value);
+  formDataObject.append("boat_owner_address", formData.boat_owner_address.value);
+  formDataObject.append("boat_owner_gender", formData.boat_owner_gender.value);
+  formDataObject.append("boat_owner_nationality", formData.boat_owner_nationality.value);
+  formDataObject.append("boat_owner_dob", formData.boat_owner_dob.value);
+  formDataObject.append("boat_owner_cpnum", formData.boat_owner_cpnum.value);
+  formDataObject.append("boat_owner_img", formData.boat_owner_img);
+  formDataObject.append("boat_owner_id", id);
+
+
+  axios.post(API_URL + 'api/editboatowner', formDataObject)
+    .then((response) => {
+      alert('Edited successfully');
+      fetchData();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+const deleteData = (id) => {
+  axios
+    .post(API_URL + 'api/deleteboatowner/' + id)
+    .then((response) => {
+      alert('Deleted successfully');
+      fetchData();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+const items = ref([]);
+const datatable = () => {
+
+  $(".listOfBoatOwners").DataTable();
+
+}
+onMounted(() => {
+  fetchClientIP();
+  console.log('Component mounted');
+  fetchData().then(() => {
+    datatable();
+  });
+});
 </script>
 
 <style scoped></style>
