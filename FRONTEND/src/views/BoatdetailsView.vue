@@ -1,12 +1,12 @@
 <script setup>
 import SidebarComponent from "../components/SidebarComponent.vue";
-import BoatdetailsComponent from "../components/BoatdetailsComponent.vue";
-
+import BoatDetailsComponent from "../components/BoatDetailsComponent.vue";
 </script>
 
 <template>
-  <div>
+  <div class="BoatDetailsComponent">
     <SidebarComponent></SidebarComponent>
-    <BoatdetailsComponent></BoatdetailsComponent>
-</div>
+    <BoatDetailsComponent></BoatDetailsComponent>
+  </div>
 </template>
+
