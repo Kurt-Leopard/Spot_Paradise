@@ -1,6 +1,6 @@
-<script setup>
+<!-- <script setup>
 import SidebarComponent from "../components/SidebarComponent.vue";
-import BoatDetailsComponent from "../components/BoatDetailsComponent.vue";
+import BoatDetailsComponent from "./components/BoatDetailsComponent.vue";
 </script>
 
 <template>
@@ -9,4 +9,7 @@ import BoatDetailsComponent from "../components/BoatDetailsComponent.vue";
     <BoatDetailsComponent></BoatDetailsComponent>
   </div>
 </template>
-
+ -->
+<template>
+  <div>hello</div>
+</template>
