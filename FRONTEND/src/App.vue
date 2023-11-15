@@ -1,263 +1,220 @@
-<script>
-import { ref, computed } from 'vue'
+<script setup>
+import { ref, computed,onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
+import { sharedState } from '@/shared/sharedState';
 
-export default {
-  setup() {
-    const isReservationTrue = ref(true)
-    const ReservationBackgroundColor = ref('')
-    const ReservationColor = ref('white')
+const isReservationTrue = ref(true)
+const ReservationBackgroundColor = ref('')
+const ReservationColor = ref('white')
 
-    const isMaintenanceTrue = ref(true)
-    const MaintenanceBackgroundColor = ref('')
-    const MaintenanceColor = ref('white')
+const isMaintenanceTrue = ref(true)
+const MaintenanceBackgroundColor = ref('')
+const MaintenanceColor = ref('white')
 
-    const isBoatdetailsTrue = ref(true)
-    const BoatdetailsBackgroundColor = ref('')
-    const BoatdetailsColor = ref('white')
+const isBoatdetailsTrue = ref(true)
+const BoatdetailsBackgroundColor = ref('')
+const BoatdetailsColor = ref('white')
 
-    const isAnnouncementTrue = ref(true)
-    const AnnouncementBackgroundColor = ref('')
-    const AnnouncementColor = ref('white')
+const isAnnouncementTrue = ref(true)
+const AnnouncementBackgroundColor = ref('')
+const AnnouncementColor = ref('white')
 
-    const isNotificationTrue = ref(true)
-    const NotificationBackgroundColor = ref('')
-    const NotificationColor = ref('white')
+const isNotificationTrue = ref(true)
+const NotificationBackgroundColor = ref('')
+const NotificationColor = ref('white')
 
-    const isTouristdestinationTrue = ref(true)
-    const TouristdestinationBackgroundColor = ref('')
-    const TouristdestinationColor = ref('white')
+const isTouristdestinationTrue = ref(true)
+const TouristdestinationBackgroundColor = ref('')
+const TouristdestinationColor = ref('white')
 
-    const isPackageTrue = ref(true)
-    const PackageBackgroundColor = ref('')
-    const PackageColor = ref('white')
+const isPackageTrue = ref(true)
+const PackageBackgroundColor = ref('')
+const PackageColor = ref('white')
 
-    const Package = () => {
-      PackageBackgroundColor.value = 'blue'
-      TouristdestinationBackgroundColor.value = ''
-      NotificationBackgroundColor.value = ''
-      MaintenanceBackgroundColor.value = ''
-      ReservationBackgroundColor.value = ''
-      BoatdetailsBackgroundColor.value = ''
-      AnnouncementBackgroundColor.value = ''
-      PackageColor.value = 'white'
-      const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
+const Package = () => {
+  PackageBackgroundColor.value = 'blue'
+  TouristdestinationBackgroundColor.value = ''
+  NotificationBackgroundColor.value = ''
+  MaintenanceBackgroundColor.value = ''
+  ReservationBackgroundColor.value = ''
+  BoatdetailsBackgroundColor.value = ''
+  AnnouncementBackgroundColor.value = ''
+  PackageColor.value = 'white'
+  const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
 
-      for (let i = 0; i < elements.length; i++) {
-        elements[i].value = elements[i].value === 'lightgray' ? '#f8f9fa' : '#f8f9fa'
-      }
-    }
-
-    const Touristdestination = () => {
-      TouristdestinationBackgroundColor.value = 'blue'
-      NotificationBackgroundColor.value = ''
-      MaintenanceBackgroundColor.value = ''
-      ReservationBackgroundColor.value = ''
-      BoatdetailsBackgroundColor.value = ''
-      AnnouncementBackgroundColor.value = ''
-      PackageBackgroundColor.value = ''
-      TouristdestinationColor.value = 'white'
-      const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
-
-      for (let i = 0; i < elements.length; i++) {
-        elements[i].value = elements[i].value === 'lightgray' ? '#f8f9fa' : '#f8f9fa'
-      }
-    }
-
-    const Notification = () => {
-      NotificationBackgroundColor.value = 'blue'
-      MaintenanceBackgroundColor.value = ''
-      ReservationBackgroundColor.value = ''
-      BoatdetailsBackgroundColor.value = ''
-      AnnouncementBackgroundColor.value = ''
-      TouristdestinationBackgroundColor.value = ''
-      PackageBackgroundColor.value = ''
-
-      NotificationColor.value = 'white'
-      const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
-
-      for (let i = 0; i < elements.length; i++) {
-        elements[i].value = elements[i].value === 'lightgray' ? '#f8f9fa' : '#f8f9fa'
-      }
-    }
-
-    const Maintenance = () => {
-      MaintenanceBackgroundColor.value = 'blue'
-      ReservationBackgroundColor.value = ''
-      BoatdetailsBackgroundColor.value = ''
-      AnnouncementBackgroundColor.value = ''
-      NotificationBackgroundColor.value = ''
-      TouristdestinationBackgroundColor.value = ''
-      PackageBackgroundColor.value = ''
-
-      MaintenanceColor.value = 'white'
-      const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
-
-      for (let i = 0; i < elements.length; i++) {
-        elements[i].value = elements[i].value === 'lightgray' ? '#f8f9fa' : '#f8f9fa'
-      }
-    }
-    const Announcement = () => {
-      AnnouncementBackgroundColor.value = 'blue'
-      MaintenanceBackgroundColor.value = ''
-      ReservationBackgroundColor.value = ''
-      BoatdetailsBackgroundColor.value = ''
-      NotificationBackgroundColor.value = ''
-      TouristdestinationBackgroundColor.value = ''
-      PackageBackgroundColor.value = ''
-
-      AnnouncementColor.value = 'white'
-      const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
-
-      for (let i = 0; i < elements.length; i++) {
-        elements[i].value = elements[i].value === 'lightgray' ? '#f8f9fa' : '#f8f9fa'
-      }
-    }
-
-    const Boatdetails = () => {
-      BoatdetailsBackgroundColor.value = 'blue'
-      ReservationBackgroundColor.value = ''
-      MaintenanceBackgroundColor.value = ''
-      AnnouncementBackgroundColor.value = ''
-      NotificationBackgroundColor.value = ''
-      TouristdestinationBackgroundColor.value = ''
-      PackageBackgroundColor.value = ''
-
-      MaintenanceColor.value = 'white'
-      const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
-
-      for (let i = 0; i < elements.length; i++) {
-        elements[i].value = elements[i].value === 'lightgray' ? '#f8f9fa' : '#f8f9fa'
-      }
-    }
-
-    const ReservationList = () => {
-      ReservationBackgroundColor.value = 'blue'
-      MaintenanceBackgroundColor.value = ''
-      BoatdetailsBackgroundColor.value = ''
-      AnnouncementBackgroundColor.value = ''
-      NotificationBackgroundColor.value = ''
-      TouristdestinationBackgroundColor.value = ''
-      PackageBackgroundColor.value = ''
-
-      ReservationColor.value = 'white'
-      const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
-
-      for (let i = 0; i < elements.length; i++) {
-        elements[i].value = elements[i].value === 'lightgray' ? '#f8f9fa' : '#f8f9fa'
-      }
-    }
-
-    const isTrue = ref(false)
-    const AccountList = () => {
-      isTrue.value = !isTrue.value
-      ReservationColor.value = isTrue.value ? 'white' : 'white'
-    }
-    const accountBackgroundColor = computed(() => isTrue.value ? 'blue' : '')
-    const Color = computed(() => isTrue.value ? 'white' : 'white')
-
-    const menuIsTrue = ref(true)
-    const menuIsFalse = ref(false)
-    const Paddingblock = ref('3px')
-    const Paddingleft = ref('5px')
-    const BorderRadius = ref('5px')
-    const Left = ref('17px')
-    const Display = ref('none')
-    const darkBlue = ref('#14243c')
-
-    const menuBtn = () => {
-      menuIsFalse.value = !menuIsFalse.value
-      menuIsTrue.value = !menuIsTrue.value
-      Paddingblock.value = menuIsTrue.value ? '3px' : '0'
-      Paddingleft.value = menuIsTrue.value ? '5px' : '0'
-      BorderRadius.value = menuIsTrue.value ? '5px' : '0'
-      Left.value = menuIsTrue.value ? '17px' : '13px'
-      Display.value = menuIsTrue.value ? 'none' : 'block'
-    }
-
-    const menuBack = () => {
-      menuIsFalse.value = !menuIsFalse.value
-      menuIsTrue.value = !menuIsTrue.value
-      Paddingblock.value = menuIsTrue.value ? '3px' : '0'
-      Paddingleft.value = menuIsTrue.value ? '5px' : '0'
-      BorderRadius.value = menuIsTrue.value ? '5px' : '0'
-      Left.value = menuIsTrue.value ? '17px' : '13px'
-      Display.value = menuIsTrue.value ? 'none' : 'block'
-    }
-
-    const ChangeToGray1 = ref('#f8f9fa')
-    const ChangeToGray2 = ref('#f8f9fa')
-    const ChangeToGray3 = ref('#f8f9fa')
-
-    const Gray = (index) => {
-      const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
-
-      for (let i = 0; i < elements.length; i++) {
-        elements[i].value = i === index ? (elements[i].value === 'lightgray' ? '#f8f9fa' : 'lightgray') : '#f8f9fa'
-        ReservationBackgroundColor.value = ''
-        MaintenanceBackgroundColor.value = ''
-        BoatdetailsBackgroundColor.value = ''
-        AnnouncementBackgroundColor.value = ''
-        NotificationBackgroundColor.value = ''
-        TouristdestinationBackgroundColor.value = ''
-        PackageBackgroundColor.value = ''
-        ReservationColor.value = 'white'
-      }
-    }
-
-    return {
-      ReservationList,
-      isReservationTrue,
-      ReservationBackgroundColor,
-      ReservationColor,
-      isTrue,
-      Boatdetails,
-      isBoatdetailsTrue,
-      BoatdetailsBackgroundColor,
-      BoatdetailsColor,
-      Maintenance,
-      isMaintenanceTrue,
-      MaintenanceBackgroundColor,
-      MaintenanceColor,
-      Announcement,
-      isAnnouncementTrue,
-      AnnouncementBackgroundColor,
-      AnnouncementColor,
-      Notification,
-      isNotificationTrue,
-      NotificationBackgroundColor,
-      NotificationColor,
-      Touristdestination,
-      isTouristdestinationTrue,
-      TouristdestinationBackgroundColor,
-      TouristdestinationColor,
-      Package,
-      isPackageTrue,
-      PackageBackgroundColor,
-      PackageColor,
-      AccountList,
-      accountBackgroundColor,
-      Color,
-      menuIsTrue,
-      menuIsFalse,
-      Paddingblock,
-      Paddingleft,
-      BorderRadius,
-      Left,
-      Display,
-      darkBlue,
-      menuBtn,
-      menuBack,
-      ChangeToGray1,
-      ChangeToGray2,
-      ChangeToGray3,
-      Gray
-    }
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].value = elements[i].value === 'lightgray' ? '#f8f9fa' : '#f8f9fa'
   }
 }
+
+const Touristdestination = () => {
+  TouristdestinationBackgroundColor.value = 'blue'
+  NotificationBackgroundColor.value = ''
+  MaintenanceBackgroundColor.value = ''
+  ReservationBackgroundColor.value = ''
+  BoatdetailsBackgroundColor.value = ''
+  AnnouncementBackgroundColor.value = ''
+  PackageBackgroundColor.value = ''
+  TouristdestinationColor.value = 'white'
+  const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
+
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].value = elements[i].value === 'lightgray' ? '#f8f9fa' : '#f8f9fa'
+  }
+}
+
+const Notification = () => {
+  NotificationBackgroundColor.value = 'blue'
+  MaintenanceBackgroundColor.value = ''
+  ReservationBackgroundColor.value = ''
+  BoatdetailsBackgroundColor.value = ''
+  AnnouncementBackgroundColor.value = ''
+  TouristdestinationBackgroundColor.value = ''
+  PackageBackgroundColor.value = ''
+
+  NotificationColor.value = 'white'
+  const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
+
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].value = elements[i].value === 'lightgray' ? '#f8f9fa' : '#f8f9fa'
+  }
+}
+
+const Maintenance = () => {
+  MaintenanceBackgroundColor.value = 'blue'
+  ReservationBackgroundColor.value = ''
+  BoatdetailsBackgroundColor.value = ''
+  AnnouncementBackgroundColor.value = ''
+  NotificationBackgroundColor.value = ''
+  TouristdestinationBackgroundColor.value = ''
+  PackageBackgroundColor.value = ''
+
+  MaintenanceColor.value = 'white'
+  const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
+
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].value = elements[i].value === 'lightgray' ? '#f8f9fa' : '#f8f9fa'
+  }
+}
+const Announcement = () => {
+  AnnouncementBackgroundColor.value = 'blue'
+  MaintenanceBackgroundColor.value = ''
+  ReservationBackgroundColor.value = ''
+  BoatdetailsBackgroundColor.value = ''
+  NotificationBackgroundColor.value = ''
+  TouristdestinationBackgroundColor.value = ''
+  PackageBackgroundColor.value = ''
+
+  AnnouncementColor.value = 'white'
+  const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
+
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].value = elements[i].value === 'lightgray' ? '#f8f9fa' : '#f8f9fa'
+  }
+}
+
+const Boatdetails = () => {
+  BoatdetailsBackgroundColor.value = 'blue'
+  ReservationBackgroundColor.value = ''
+  MaintenanceBackgroundColor.value = ''
+  AnnouncementBackgroundColor.value = ''
+  NotificationBackgroundColor.value = ''
+  TouristdestinationBackgroundColor.value = ''
+  PackageBackgroundColor.value = ''
+
+  MaintenanceColor.value = 'white'
+  const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
+
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].value = elements[i].value === 'lightgray' ? '#f8f9fa' : '#f8f9fa'
+  }
+}
+
+const ReservationList = () => {
+  ReservationBackgroundColor.value = 'blue'
+  MaintenanceBackgroundColor.value = ''
+  BoatdetailsBackgroundColor.value = ''
+  AnnouncementBackgroundColor.value = ''
+  NotificationBackgroundColor.value = ''
+  TouristdestinationBackgroundColor.value = ''
+  PackageBackgroundColor.value = ''
+
+  ReservationColor.value = 'white'
+  const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
+
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].value = elements[i].value === 'lightgray' ? '#f8f9fa' : '#f8f9fa'
+  }
+}
+
+const isTrue = ref(false)
+const AccountList = () => {
+  isTrue.value = !isTrue.value
+  ReservationColor.value = isTrue.value ? 'white' : 'white'
+}
+const accountBackgroundColor = computed(() => isTrue.value ? 'blue' : '')
+const Color = computed(() => isTrue.value ? 'white' : 'white')
+
+const menuIsTrue = ref(true)
+const menuIsFalse = ref(false)
+const Paddingblock = ref('3px')
+const Paddingleft = ref('5px')
+const BorderRadius = ref('5px')
+const Left = ref('17px')
+const Display = ref('none')
+const darkBlue = ref('#14243c')
+
+const menuBtn = () => {
+  menuIsFalse.value = !menuIsFalse.value
+  menuIsTrue.value = !menuIsTrue.value
+  Paddingblock.value = menuIsTrue.value ? '3px' : '0'
+  Paddingleft.value = menuIsTrue.value ? '5px' : '0'
+  BorderRadius.value = menuIsTrue.value ? '5px' : '0'
+  Left.value = menuIsTrue.value ? '17px' : '13px'
+  Display.value = menuIsTrue.value ? 'none' : 'block'
+}
+
+const menuBack = () => {
+  menuIsFalse.value = !menuIsFalse.value
+  menuIsTrue.value = !menuIsTrue.value
+  Paddingblock.value = menuIsTrue.value ? '3px' : '0'
+  Paddingleft.value = menuIsTrue.value ? '5px' : '0'
+  BorderRadius.value = menuIsTrue.value ? '5px' : '0'
+  Left.value = menuIsTrue.value ? '17px' : '13px'
+  Display.value = menuIsTrue.value ? 'none' : 'block'
+}
+
+const ChangeToGray1 = ref('#f8f9fa')
+const ChangeToGray2 = ref('#f8f9fa')
+const ChangeToGray3 = ref('#f8f9fa')
+
+const Gray = (index) => {
+  const elements = [ChangeToGray1, ChangeToGray2, ChangeToGray3]
+
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].value = i === index ? (elements[i].value === 'lightgray' ? '#f8f9fa' : 'lightgray') : '#f8f9fa'
+    ReservationBackgroundColor.value = ''
+    MaintenanceBackgroundColor.value = ''
+    BoatdetailsBackgroundColor.value = ''
+    AnnouncementBackgroundColor.value = ''
+    NotificationBackgroundColor.value = ''
+    TouristdestinationBackgroundColor.value = ''
+    PackageBackgroundColor.value = ''
+    ReservationColor.value = 'white'
+  }
+}
+const logout = () => {
+  sharedState.isLog = false;
+  localStorage.setItem('isLog', 'false'); // Save to localStorage
+  window.location.href="http://localhost:5173/";
+};
+onMounted(async () => {
+  sharedState.isLog = localStorage.getItem('isLog') === 'false';
+});
 </script>
 <template>
   <header class="d-flex">
+    <!-- Icon Sidwebar -->
     <nav class="menu-icon" :style="{ paddingBlock: Paddingblock, paddingLeft: Paddingleft }">
       <div class="menu-icon-container" :style="{ borderRadius: BorderRadius }">
         <div class="nav-link" style="margin-bottom: 27px;">
@@ -433,8 +390,28 @@ export default {
             </RouterLink>
           </div>
         </div>
+        <div class="nav-link" @click="Notification" style="position: fixed; bottom:20px; left:4px;">
+          <div class="text-white" style="cursor: pointer;">
+            <RouterLink to="/NotificationView">
+
+              <svg xmlns="http://www.w3.org/2000/svg" @click="logout" width="25" height="25" fill="currentColor"
+                class="bi bi-power logout-icon" viewBox="0 0 16 16">
+                <path d="M7.5 1v7h1V1h-1z" />
+                <path
+                  d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z" />
+              </svg>
+              <div class="logout-modal">
+                Sign Out
+              </div>
+            </RouterLink>
+          </div>
+        </div>
       </div>
+
     </nav>
+
+
+    <!-- Text Sidebar-->
     <nav class="menu" v-if="menuIsTrue" style="width: 20vw;">
       <div>
         <h5 class="text-white py-2 px-3 title" style="display: flex; justify-content: space-between;">Spot Paradise
@@ -445,7 +422,6 @@ export default {
           </svg>
         </h5>
       </div>
-
       <div class="nav-link">
         <RouterLink to="/">Dashboard</RouterLink>
       </div>
@@ -543,6 +519,23 @@ export default {
   z-index: 2;
 }
 
+.logout-modal {
+  display: none;
+  position: fixed;
+  height: 40px;
+  width: 200px;
+  left: 160px;
+  bottom: 30px;
+  transform: translateX(-50%);
+  padding-top: 7px;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  z-index: 2;
+}
+
 .back-modal {
   display: none;
   position: fixed;
@@ -569,12 +562,28 @@ export default {
 .maintenance-icon:hover+.Account-modal,
 .notification-icon:hover+.Account-modal,
 .Touristdestination-icon:hover+.Account-modal,
-.Package-icon:hover+.Account-modal {
+.Package-icon:hover+.Account-modal,
+.logout-icon:hover+.Account-modal {
   display: block;
 }
 
 .back-icon:hover+.back-modal {
   display: block;
+}
+
+.logout-icon:hover+.logout-modal {
+  display: block;
+}
+
+.logout-icon {
+  background-color: #14243c;
+  color: white;
+  padding: 3px;
+  border-radius: 5px;
+}
+
+.logout-icon:hover {
+  color: gray;
 }
 
 .menu-icon {

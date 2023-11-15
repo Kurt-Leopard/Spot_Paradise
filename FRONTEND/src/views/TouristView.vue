@@ -1,5 +1,6 @@
 
 <script setup>
+
 import SidebarComponent from "../components/SidebarComponent.vue";
 import TouristComponent from '../components/TouristComponent.vue'; 
 </script>
@@ -7,6 +8,7 @@ import TouristComponent from '../components/TouristComponent.vue';
   <div class="TouristComponent">
     <SidebarComponent></SidebarComponent>
     <TouristComponent></TouristComponent>
+    
   </div>
 </template>
 
