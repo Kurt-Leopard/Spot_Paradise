@@ -93,6 +93,7 @@
                   <th>Email</th>
                   <th>Gender</th>
                   <th>Phone</th>
+                  <th>Add</th>
                   <th>View</th>
                   <th>Edit</th>
                   <th>Delete</th>
@@ -108,6 +109,125 @@
                   <td>{{ item.boat_owner_email }}</td>
                   <td>{{ item.boat_owner_gender }}</td>
                   <td>{{ item.boat_owner_cpnum }}</td>
+                  <td>
+                    <!--deatisl  -->
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" fill="currentColor"
+                      class="bi bi-plus-square-fill p-1 mx-1 rounded" viewBox="0 0 16 16" data-bs-toggle="modal"
+                      :data-bs-target="'#detailsmodal-' + item.boat_owner_id" style="color:#003366; ">
+                      <path
+                        d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
+                    </svg>
+                    <!-- details modal -->
+                    <div class="modal fade" :id="'detailsmodal-' + item.boat_owner_id" tabindex="-1"
+                      aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content" style="max-height: 550px; overflow-y: auto">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                              Edit Information
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <form @submit="detailsData(item.boat_owner_id)" enctype="multipart/form-data">
+                              <div class="mb-3">
+                                <label for="profile" class="form-label">Profile Picture</label>
+                                <div class="d-flex">
+                                  <input type="file" id="boat_owner_img" name="profile" class="form-control"
+                                    @change="handleFileUploaddetails1" />
+
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="currentColor"
+                                     class="bi bi-plus-square-fill p-1 mx-1 rounded" viewBox="0 0 16 16"
+                                    style="color:#003366; " @click="addImg">
+                                    <path
+                                      d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
+                                  </svg>
+                                 
+                                </div>
+                              </div>
+                              <div class="mb-3" v-if="isImg2">
+                                <label for="profile" class="form-label">Profile Picture</label>
+                                <div class="d-flex">
+                                  <input type="file" id="boat_owner_img" name="profile" class="form-control"
+                                    @change="handleFileUploaddetails2" />
+                                
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="currentColor"
+                                    class="bi bi-x-square-fill p-1 mx-1 rounded" viewBox="0 0 16 16"
+                                    style="color:#003366;" @click="subImg2">
+                                    <path
+                                      d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z" />
+                                  </svg>
+                                </div>
+                              </div>
+                              <div class="mb-3" v-if="isImg3">
+                                <label for="profile" class="form-label">Profile Picture</label>
+                                <div class="d-flex">
+                                  <input type="file" id="boat_owner_img" name="profile" class="form-control"
+                                    @change="handleFileUploaddetails3" />
+                                
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="currentColor"
+                                    class="bi bi-x-square-fill p-1 mx-1 rounded" viewBox="0 0 16 16"
+                                    style="color:#003366;" @click="subImg3">
+                                    <path
+                                      d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z" />
+                                  </svg>
+                                </div>
+                              </div>
+                              <div class="mb-3" v-if="isImg4">
+                                <label for="profile" class="form-label">Profile Picture</label>
+                                <div class="d-flex">
+                                  <input type="file" id="boat_owner_img" name="profile" class="form-control"
+                                    @change="handleFileUploaddetails4" />
+                                
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="currentColor"
+                                    class="bi bi-x-square-fill p-1 mx-1 rounded" viewBox="0 0 16 16"
+                                    style="color:#003366;" @click="subImg4">
+                                    <path
+                                      d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z" />
+                                  </svg>
+                                </div>
+                              </div>
+                              <div class="mb-3" v-if="isImg5">
+                                <label for="profile" class="form-label">Profile Picture</label>
+                                <div class="d-flex">
+                                  <input type="file" id="boat_owner_img" name="profile" class="form-control"
+                                    @change="handleFileUploaddetails5" />
+                                
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="currentColor"
+                                    class="bi bi-x-square-fill p-1 mx-1 rounded" viewBox="0 0 16 16"
+                                    style="color:#003366;" @click="subImg5">
+                                    <path
+                                      d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z" />
+                                  </svg>
+                                </div>
+                              </div>
+                             
+                         
+                              <div class="mb-3">
+                                <label for="boatName" class="form-label">Baot Name</label>
+                                <input type="text" class="form-control" id="boatName"
+                                  v-model="formDetails.boatName.value" />
+                              </div>
+                              <div class="mb-3">
+                                <label for="Capacity" class="form-label">Baot Capacity</label>
+                                <input type="number" class="form-control" id="Capacity"
+                                  v-model="formDetails.boatCapacity.value" />
+                              </div>
+
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                  Close
+                                </button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </td>
                   <td>
                     <!-- view btn -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
@@ -291,14 +411,14 @@ import { ref, onMounted } from "vue";
 import axios from 'axios';
 const clientIP = ref('');
 
-let API_URL = "http://localhost:3000/";
+let API_URL = "" || "http://localhost:3000/";
 
 const fetchClientIP = async () => {
   try {
     const response = await axios.get('http://localhost:3000/get-local-ip');
     clientIP.value = response.data;
-    // console.log(clientIP.value['localIpAddress']);
-    // API_URL = `http://${clientIP.value['localIpAddress']}:3000/`;
+    console.log(clientIP.value['localIpAddress']);
+    API_URL = `http://${clientIP.value['localIpAddress']}:3000/`;
     console.log(API_URL);
   } catch (error) {
     console.error('Error fetching client IP:', error);
@@ -313,6 +433,106 @@ const fetchData = async () => {
     console.error('Error fetching data:', error);
   }
 };
+// boat details
+
+const isImg2 = ref(false);
+const isImg3 = ref(false);
+const isImg4 = ref(false);
+const isImg5 = ref(false);
+let i=1;
+
+const addImg = () => {
+  if (i !== 5) {
+    i++;
+
+    switch (i) {
+      case 2:
+        isImg2.value = true;
+        break;
+      case 3:
+        isImg3.value = true;
+        break;
+      case 4:
+        isImg4.value = true;
+        break;
+      case 5:
+        isImg5.value = true;
+        break;
+      default:
+        break;
+    }
+  }
+
+  console.log(i);
+};
+
+
+
+const subImg2 = () => {
+  isImg2.value = !isImg2.value;
+  i--;
+}
+const subImg3 = () => {
+  isImg3.value = !isImg3.value;
+  i--;
+}
+
+const subImg4 = () => {
+  isImg4.value = !isImg4.value;
+  i--;
+}
+
+const subImg5 = () => {
+  isImg5.value = !isImg5.value;
+  i--;
+}
+
+
+
+const formDetails = {
+  boatName: ref(''),
+  boatCapacity: ref(''),
+};
+const handleFileUploaddetails1 = (event) => {
+  formDetails.Bimag1 = event.target.files[0];
+};
+const handleFileUploaddetails2 = (event) => {
+  formDetails.Bimag2 = event.target.files[0];
+};
+const handleFileUploaddetails3 = (event) => {
+  formDetails.Bimag3 = event.target.files[0];
+};
+const handleFileUploaddetails4 = (event) => {
+  formDetails.Bimag4 = event.target.files[0];
+};
+const handleFileUploaddetails5 = (event) => {
+  formDetails.Bimag5 = event.target.files[0];
+};
+
+const detailsData = (id) => {
+  console.log(id);
+  const formDataObject = new FormData();
+  formDataObject.append("boatName", formDetails.boatName.value);
+  formDataObject.append("boatCapacity", formDetails.boatCapacity.value);
+  formDataObject.append("Bimag1", formDetails.Bimag1);
+  formDataObject.append("Bimag2", formDetails.Bimag2);
+  formDataObject.append("Bimag3", formDetails.Bimag3);
+  formDataObject.append("Bimag4", formDetails.Bimag4);
+  formDataObject.append("Bimag5", formDetails.Bimag5);
+  formDataObject.append("boat_owner_id", id);
+
+  axios.post(API_URL + 'api/insert/boatdetails', formDataObject)
+    .then((response) => {
+      alert('Inserted boat details successfully');
+      fetchData();
+    })
+    .catch((error) => {
+      console.log(error);
+      
+    });
+}
+
+
 
 const formData = {
   boat_owner_fname: ref(''),
@@ -399,12 +619,20 @@ const datatable = () => {
   $(".listOfBoatOwners").DataTable();
 
 }
-onMounted(() => {
-  fetchClientIP();
+// onMounted(() => {
+//   fetchClientIP();
+//   console.log('Component mounted');
+//   fetchData().then(() => {
+//     datatable();
+//   });
+// });
+
+onMounted(async () => {
+  await fetchClientIP();
+
   console.log('Component mounted');
-  fetchData().then(() => {
-    datatable();
-  });
+  await fetchData();
+  datatable();
 });
 </script>
 

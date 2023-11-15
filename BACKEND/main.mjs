@@ -1,11 +1,11 @@
-import express from 'express';
-import cors from 'cors';
-import multer from 'multer';
-import path from 'path';
-import ip from 'ip';
-import CRUD from './crud.mjs';
-import BOATOWNERCRUD from './boatowner.mjs';
-import TOURGUIDECRUD from './tourguide.mjs';
+import express from "express";
+import cors from "cors";
+import multer from "multer";
+import path from "path";
+import ip from "ip";
+import CRUD from "./crud.mjs";
+import BOATOWNERCRUD from "./boatowner.mjs";
+import TOURGUIDECRUD from "./tourguide.mjs";
 
 class Server {
   constructor() {
@@ -15,7 +15,7 @@ class Server {
 
     const storage = multer.diskStorage({
       destination: (req, file, callback) => {
-        callback(null, '../FRONTEND/public/uploads');
+        callback(null, "../FRONTEND/public/uploads");
       },
       filename: (req, file, callback) => {
         const extname = path.extname(file.originalname);
@@ -31,29 +31,59 @@ class Server {
 
   setupRoutes() {
     const app = this.app;
-    app.get('/get-local-ip', this.handleIPconfig.bind(this));
-    app.post('/api/insert', this.upload.single('profilePicture'), this.handleInsert.bind(this));
-    app.get('/api/get', this.handleGet.bind(this));
-    app.put('/api/editTourist', this.upload.single('profilePicture'), this.handleEditTourist.bind(this));
-    app.post('/api/delete/:id', this.handleDelete.bind(this));
+    app.get("/api/auth", this.handleGetAuth.bind(this));
+    app.get("/get-local-ip", this.handleIPconfig.bind(this));
+    app.post("/api/insert",this.upload.single("profilePicture"),this.handleInsert.bind(this));
+    app.get("/api/get", this.handleGet.bind(this));
+    app.put("/api/editTourist",this.upload.single("profilePicture"),this.handleEditTourist.bind(this));
+    app.post("/api/delete/:id", this.handleDelete.bind(this));
 
     // Routes for boat owner
-    app.post('/api/insert/boatowner', this.upload.single('boat_owner_img'), this.handleInsertBoatOwner.bind(this));
-    app.get('/api/getboatowner', this.handleGetBoatOwner.bind(this));
-    app.post('/api/deleteboatowner/:id', this.handleDeleteBoatOwner.bind(this));
-    app.post('/api/editboatowner', this.upload.single('boat_owner_img'), this.handleEditBoatOwner.bind(this));
+    app.post("/api/insert/boatowner",this.upload.single("boat_owner_img"),this.handleInsertBoatOwner.bind(this));
+    app.post(
+      '/api/insert/boatdetails',
+      this.upload.fields([
+        { name: 'Bimag1' },
+        { name: 'Bimag2' },
+        { name: 'Bimag3' },
+        { name: 'Bimag4' },
+        { name: 'Bimag5' },
+      ]),
+      this.handleInsertBoatdetails.bind(this)
+    );
+    app.get("/api/getboatowner", this.handleGetBoatOwner.bind(this));
+    app.post("/api/deleteboatowner/:id", this.handleDeleteBoatOwner.bind(this));
+    app.post("/api/editboatowner",this.upload.single("boat_owner_img"),this.handleEditBoatOwner.bind(this));
 
     // Routes for tour guide
-    app.get('/api/gettourguide', this.handleGetTourGuide.bind(this));
-    app.post('/api/insert/tourguide', this.upload.single('tg_img'), this.handleInsertTourGuide.bind(this));
-    app.post('/api/deletetourguide/:id', this.handleDeleteTourGuide.bind(this));
-    app.put('/api/edittourguide', this.upload.single('tg_img'), this.handleEditTourGuide.bind(this));
+    app.get("/api/gettourguide", this.handleGetTourGuide.bind(this));
+    app.post("/api/insert/tourguide",this.upload.single("tg_img"),this.handleInsertTourGuide.bind(this));
+    app.post("/api/deletetourguide/:id", this.handleDeleteTourGuide.bind(this));
+    app.put("/api/edittourguide",this.upload.single("tg_img"),this.handleEditTourGuide.bind(this));
+  }
+
+  async handleGetAuth(req, res) {
+    try {
+      const data = await CRUD.getAdmin();
+      res.json(data);
+    } catch (error) {
+      res.status(500).json({ error: "Error fetching data" });
+    }
   }
 
   async handleInsert(req, res) {
-    const { firstName, lastName, email, dateOfBirth, gender, phone, address, tourist_del } = req.body;
+    const {
+      firstName,
+      lastName,
+      email,
+      dateOfBirth,
+      gender,
+      phone,
+      address,
+      tourist_del,
+    } = req.body;
     const profilePicture = req.file ? req.file.filename : null;
-  
+
     try {
       const result = await CRUD.insertData({
         firstName,
@@ -76,25 +106,39 @@ class Server {
       const data = await CRUD.getData();
       res.json(data);
     } catch (error) {
-      res.status(500).json({ error: 'Error fetching data' });
+      res.status(500).json({ error: "Error fetching data" });
     }
-    
   }
   async handleEditTourist(req, res) {
     const {
-      firstName, lastName, email, dateOfBirth, gender, phone, address, Tourist_id
+      firstName,
+      lastName,
+      email,
+      dateOfBirth,
+      gender,
+      phone,
+      address,
+      Tourist_id,
     } = req.body;
     const profilePicture = req.file ? req.file.filename : null;
     try {
       const result = await CRUD.editData({
-        firstName, lastName, email, dateOfBirth, gender, phone, address, profilePicture, Tourist_id
+        firstName,
+        lastName,
+        email,
+        dateOfBirth,
+        gender,
+        phone,
+        address,
+        profilePicture,
+        Tourist_id,
       });
-      
-      console.log('Database update result:', result); // Add this line for logging
-      
+
+      console.log("Database update result:", result); // Add this line for logging
+
       res.json({ message: result });
     } catch (error) {
-      console.error('Error in route handler:', error); // Add this line for logging
+      console.error("Error in route handler:", error); // Add this line for logging
       res.status(500).json({ error });
     }
   }
@@ -109,7 +153,7 @@ class Server {
     }
   }
 
-    // functions for boat owner
+  // functions for boat owner
   async handleInsertBoatOwner(req, res) {
     const {
       boat_owner_fname,
@@ -120,7 +164,7 @@ class Server {
       boat_owner_gender,
       boat_owner_dob,
       boat_owner_nationality,
-      boat_owner_cpnum
+      boat_owner_cpnum,
     } = req.body;
     const boat_owner_img = req.file ? req.file.filename : null;
     try {
@@ -137,7 +181,6 @@ class Server {
         boat_owner_img,
       });
       res.json({ message: result });
-  
     } catch (error) {
       res.status(500).json({ error });
     }
@@ -145,10 +188,39 @@ class Server {
   async handleGetBoatOwner(req, res) {
     try {
       const data = await BOATOWNERCRUD.getData();
-      
+
       res.json(data);
     } catch (error) {
-      res.status(500).json({ error: 'Error fetching data' });
+      res.status(500).json({ error: "Error fetching data" });
+    }
+  }
+
+  // boat details
+  async handleInsertBoatdetails(req, res) {
+    const { boatName, boatCapacity, boat_owner_id } = req.body;
+    const Bimag1 = req.files['Bimag1'] ? req.files['Bimag1'][0].filename : null;
+    const Bimag2 = req.files['Bimag2'] ? req.files['Bimag2'][0].filename : null;
+    const Bimag3 = req.files['Bimag3'] ? req.files['Bimag3'][0].filename : null;
+    const Bimag4 = req.files['Bimag4'] ? req.files['Bimag4'][0].filename : null;
+    const Bimag5 = req.files['Bimag5'] ? req.files['Bimag5'][0].filename : null;
+  
+    try {
+      const result = await BOATOWNERCRUD.insertDetails({
+        boatName, boatCapacity, Bimag1, Bimag2, Bimag3, Bimag4, Bimag5, boat_owner_id
+      });
+      res.json({ message: result });
+    } catch (error) {
+      res.status(500).json({ error });
+    }
+  }
+
+  async handleGetBoatOwner(req, res) {
+    try {
+      const data = await BOATOWNERCRUD.getData();
+
+      res.json(data);
+    } catch (error) {
+      res.status(500).json({ error: "Error fetching data" });
     }
   }
   async handleEditBoatOwner(req, res) {
@@ -162,7 +234,7 @@ class Server {
       boat_owner_dob,
       boat_owner_nationality,
       boat_owner_cpnum,
-      boat_owner_id
+      boat_owner_id,
     } = req.body;
     const boat_owner_img = req.file ? req.file.filename : null;
     try {
@@ -179,7 +251,7 @@ class Server {
         boat_owner_img,
         boat_owner_id,
       });
-   
+
       res.json({ message: result });
     } catch (error) {
       res.status(500).json({ error });
@@ -207,7 +279,7 @@ class Server {
       tg_dob,
       tg_status,
       tg_nationality,
-      tg_cpnum
+      tg_cpnum,
     } = req.body;
     const tg_img = req.file ? req.file.filename : null;
     try {
@@ -224,19 +296,19 @@ class Server {
         tg_cpnum,
         tg_img,
       });
-   
+
       res.json({ message: result });
     } catch (error) {
       res.status(500).json({ error });
     }
   }
   async handleGetTourGuide(req, res) {
-  try {
-    const data = await TOURGUIDECRUD.getData();
-    res.json(data);
-  } catch (error) {
-    console.log(error);
-  }
+    try {
+      const data = await TOURGUIDECRUD.getData();
+      res.json(data);
+    } catch (error) {
+      console.log(error);
+    }
   }
   async handleEditTourGuide(req, res) {
     const {
@@ -250,7 +322,7 @@ class Server {
       tg_status,
       tg_nationality,
       tg_cpnum,
-      tg_id
+      tg_id,
     } = req.body;
     const tg_img = req.file ? req.file.filename : null;
     try {
@@ -268,7 +340,7 @@ class Server {
         tg_img,
         tg_id,
       });
-      
+
       res.json({ message: result });
     } catch (error) {
       res.status(500).json({ error });
@@ -283,13 +355,11 @@ class Server {
       console.log(error);
     }
   }
-async handleIPconfig(req,res){
-  const localIpAddress = ip.address();
-  res.json({ localIpAddress });
+  async handleIPconfig(req, res) {
+    const localIpAddress = ip.address();
+    res.json({ localIpAddress });
   }
-  
 
-  
   start() {
     this.app.listen(this.port, () => {
       console.log(`Server is running on port ${this.port}`);

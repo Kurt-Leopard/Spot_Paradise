@@ -27,6 +27,17 @@ async insertData(formData) {
     }
   }
   
+  async getAdmin() {
+    const query = 'SELECT * FROM admin'; // You can adjust the SQL query to fetch data based on your database schema.
+    
+    try {
+      const result = await db.query(query);
+      return result; // You may need to format the result as needed before returning it.
+    } catch (error) {
+      console.error('Database query error:', error);
+      throw 'Database query error';
+    }
+  }
 
 
 async editData(formDataEdit) {
@@ -51,7 +62,6 @@ async editData(formDataEdit) {
 
 
   async deleteData(id) {
-    // const query = 'DELETE FROM touristaccount WHERE id=?';
     const query = 'CALL del_tourist(?)';
 
     try {

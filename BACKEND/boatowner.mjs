@@ -25,6 +25,29 @@ class boatowner {
             throw 'Database query error';
         }
     }
+
+    async insertDetails(formDetails) {
+        const
+            {
+                boatName,
+                boatCapacity,
+                Bimag1,
+                Bimag2,
+                Bimag3,
+                Bimag4,
+                Bimag5,
+                boat_owner_id,
+            } = formDetails;
+        const values = [boatName, boatCapacity,Bimag1, Bimag2,, Bimag3,, Bimag4, Bimag5,boat_owner_id];
+        const query = 'CALL add_boat_details(?,?,?,?,?,?,?,?)';
+        try {
+            await db.query(query, values);
+            return 'Data inserted successfully';
+        } catch (error) {
+            console.error('Database query error:', error);
+            throw 'Database query error';
+        }
+    }
     async getData() {
         const query = 'CAll show_boat_owner()';
         try {

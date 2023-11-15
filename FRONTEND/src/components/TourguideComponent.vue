@@ -301,14 +301,14 @@ import axios from 'axios';
 
 const clientIP = ref('');
 
-let API_URL = "http://localhost:3000/";
+let API_URL = "" || "http://localhost:3000/";
 
 const fetchClientIP = async () => {
   try {
     const response = await axios.get('http://localhost:3000/get-local-ip');
     clientIP.value = response.data;
-    // console.log(clientIP.value['localIpAddress']);
-    // API_URL = `http://${clientIP.value['localIpAddress']}:3000/`;
+    console.log(clientIP.value['localIpAddress']);
+    API_URL = `http://${clientIP.value['localIpAddress']}:3000/`;
     console.log(API_URL);
   } catch (error) {
     console.error('Error fetching client IP:', error);
@@ -412,12 +412,20 @@ const datatable = () => {
   $(".list").DataTable();
 
 }
-onMounted(() => {
-  fetchClientIP();
+// onMounted(() => {
+//   fetchClientIP();
+//   console.log('Component mounted');
+//   fetchData().then(() => {
+//     datatable();
+//   });
+// });
+
+onMounted(async () => {
+  await fetchClientIP();
+
   console.log('Component mounted');
-  fetchData().then(() => {
-    datatable();
-  });
+  await fetchData();
+  datatable();
 });
 </script>
 <style scoped></style>

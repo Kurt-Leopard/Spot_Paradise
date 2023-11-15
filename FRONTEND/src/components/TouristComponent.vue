@@ -21,7 +21,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form @submit.prevent="saveChanges" enctype="multipart/form-data">
+              <form  enctype="multipart/form-data">
 
                 <div class="mb-3">
                   <label for="profile" class="form-label">Profile Picture</label>
@@ -62,7 +62,7 @@
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     Close
                   </button>
-                  <button type="submit" class="btn btn-primary">Save changes</button>
+                  <button type="submit" class="btn btn-primary" @click="saveChanges">Save changes</button>
                 </div>
               </form>
             </div>
@@ -253,7 +253,7 @@
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                 Cancel
                               </button>
-                              <button type="button" class="btn btn-primary">
+                              <button type="button" class="btn btn-primary" @click="deleteData(item.Tourist_id)">
                                 Yes
                               </button>
                             </div>
@@ -273,137 +273,131 @@
 </template>
   
 <script setup>
-import { ref, onMounted, nextTick } from "vue";
-import axios from 'axios'
+import { ref, onMounted } from "vue";
+import axios from 'axios';
 
-    const items = ref([]);
+const items = ref([]);
+const clientIP = ref('');
+let API_URL = "" || "http://localhost:3000/";
 
-    const clientIP = ref('');
+const fetchClientIP = async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/get-local-ip');
+    clientIP.value = response.data;
+    API_URL = `http://${clientIP.value['localIpAddress']}:3000/`;
+    console.log(API_URL);
+  } catch (error) {
+    console.error('Error fetching client IP:', error);
+  }
+};
 
-    let API_URL = "http://localhost:3000/";
+const fetchData = async () => {
+  try {
+    const response = await axios.get(API_URL + 'api/get');
+    items.value = response.data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
 
-    const fetchClientIP = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/get-local-ip');
-        clientIP.value = response.data;
-        // console.log(clientIP.value['localIpAddress']);
-        // API_URL = `http://${clientIP.value['localIpAddress']}:3000/`;
-       console.log(API_URL);
-      } catch (error) {
-        console.error('Error fetching client IP:', error);
-      }
-    };
+const formData = {
+  firstName: ref(''),
+  lastName: ref(''),
+  email: ref(''),
+  dateOfBirth: ref(''),
+  gender: ref(''),
+  phone: ref(''),
+  address: ref(''),
+  profilePicture: null,
+  tourist_del: ref(''),
+};
 
+const handleFileUpload = (event) => {
+  formData.profilePicture = event.target.files[0];
+};
 
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(API_URL + 'api/get');
-        items.value = response.data;
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    const formData = {
-      firstName: ref(''),
-      lastName: ref(''),
-      email: ref(''),
-      dateOfBirth: ref(''),
-      gender: ref(''),
-      phone: ref(''),
-      address: ref(''),
-      profilePicture: null,
-      tourist_del: ref(''),
-    };
+const saveChanges = async () => {
+  const formDataObject = new FormData();
+  formData.tourist_del.value = 1;
+  formDataObject.append("firstName", formData.firstName.value);
+  formDataObject.append("lastName", formData.lastName.value);
+  formDataObject.append("email", formData.email.value);
+  formDataObject.append("dateOfBirth", formData.dateOfBirth.value);
+  formDataObject.append("gender", formData.gender.value);
+  formDataObject.append("phone", formData.phone.value);
+  formDataObject.append("address", formData.address.value);
+  formDataObject.append("profilePicture", formData.profilePicture);
+  formDataObject.append("tourist_del", formData.tourist_del.value);
 
+  try {
+    const response = await axios.post(API_URL + 'api/insert', formDataObject);
+    alert('Inserted successfully');
+    fetchData();
+  } catch (error) {
+    console.error('Error inserting data:', error);
+  }
+};
 
-    const handleFileUpload = (event) => {
-      formData.profilePicture = event.target.files[0];
-    };
+const formDataEdit = {
+  firstName: ref(''),
+  lastName: ref(''),
+  email: ref(''),
+  dateOfBirth: ref(''),
+  gender: ref(''),
+  phone: ref(''),
+  address: ref(''),
+  profilePicture: null,
+  Tourist_id: ref(''),
+};
 
-    const saveChanges = async () => {
-      const formDataObject = new FormData();
-      formData.tourist_del.value = 1;
-      formDataObject.append("firstName", formData.firstName.value);
-      formDataObject.append("lastName", formData.lastName.value);
-      formDataObject.append("email", formData.email.value);
-      formDataObject.append("dateOfBirth", formData.dateOfBirth.value);
-      formDataObject.append("gender", formData.gender.value);
-      formDataObject.append("phone", formData.phone.value);
-      formDataObject.append("address", formData.address.value);
-      formDataObject.append("profilePicture", formData.profilePicture);
-      formDataObject.append("tourist_del", formData.tourist_del.value);
+const handleUpdateFileUpload = (event) => {
+  formDataEdit.profilePicture = event.target.files[0];
+  console.log('formDataEdit:', formDataEdit.profilePicture);
+};
 
-      axios
-        .post(API_URL + 'api/insert', formDataObject)
-        .then((response) => {
+const saveChangesUpdate = async (id) => {
+  const formDataObject = new FormData();
+  formDataEdit.Tourist_id = id;
+  formDataObject.append("firstName", formDataEdit.firstName.value);
+  formDataObject.append("lastName", formDataEdit.lastName.value);
+  formDataObject.append("email", formDataEdit.email.value);
+  formDataObject.append("dateOfBirth", formDataEdit.dateOfBirth.value);
+  formDataObject.append("gender", formDataEdit.gender.value);
+  formDataObject.append("phone", formDataEdit.phone.value);
+  formDataObject.append("address", formDataEdit.address.value);
+  formDataObject.append("profilePicture", formDataEdit.profilePicture);
+  formDataObject.append("Tourist_id", formDataEdit.Tourist_id);
 
-          alert('Inserted successfully');
-          fetchData();
-        })
-        .catch((error) => {
-          console.error('Error inserting data:', error);
-        });
-    };
-
-
-    // To set dafualt value in the Edit form of tourist
-    const formDataEdit = {
-      firstName: ref(''),
-      lastName: ref(''),
-      email: ref(''),
-      dateOfBirth: ref(''),
-      gender: ref(''),
-      phone: ref(''),
-      address: ref(''),
-      profilePicture: null,
-      Tourist_id: ref(''),
-    };
-
-
-    const handleUpdateFileUpload = (event) => {
-      formDataEdit.profilePicture = event.target.files[0];
-      console.log('formDataEdit:', formDataEdit.profilePicture);
-    };
-
-    const saveChangesUpdate = async (id) => {
-      const formDataObject = new FormData();
-      formDataEdit.Tourist_id = id;
-      formDataObject.append("firstName", formDataEdit.firstName.value);
-      formDataObject.append("lastName", formDataEdit.lastName.value);
-      formDataObject.append("email", formDataEdit.email.value);
-      formDataObject.append("dateOfBirth", formDataEdit.dateOfBirth.value);
-      formDataObject.append("gender", formDataEdit.gender.value);
-      formDataObject.append("phone", formDataEdit.phone.value);
-      formDataObject.append("address", formDataEdit.address.value);
-      formDataObject.append("profilePicture", formDataEdit.profilePicture);
-      formDataObject.append("Tourist_id", formDataEdit.Tourist_id);
-
-      axios
-        .put(API_URL + 'api/editTourist', formDataObject)
-        .then((response) => {
-
-          alert('Updated successfully');
-          fetchData();
-        })
-        .catch((error) => {
-          console.error('Error inserting data:', error);
-        });
-    };
-    const datatable = () => {
-
-      $(".list").DataTable();
-
-    }
-    onMounted(() => {
-      fetchClientIP();
-      console.log('Component mounted');
-      fetchData().then(() => {
-        datatable();
-      });
+  try {
+    const response = await axios.put(API_URL + 'api/editTourist', formDataObject);
+    alert('Updated successfully');
+    fetchData();
+  } catch (error) {
+    console.error('Error updating data:', error);
+  }
+};
+const deleteData = (tourist_del) => {
+  axios
+    .post(API_URL + 'api/delete/' + tourist_del)
+    .then((response) => {
+      alert('Deleted successfully');
+      fetchData();
+    })
+    .catch((error) => {
+      console.log(error);
     });
+};
+
+const datatable = () => {
+  $(".list").DataTable();
+};
+
+onMounted(async () => {
+  await fetchClientIP();
+
+  console.log('Component mounted');
+  await fetchData();
+  datatable();
+});
 </script>
 <style scoped></style>
-
-
-
-  
